@@ -1,0 +1,2 @@
+*.arcd filter=lfs diff=lfs merge=lfs -text
+*.arci filter=lfs diff=lfs merge=lfs -text
