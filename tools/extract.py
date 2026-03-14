@@ -12,11 +12,12 @@ from pathlib import Path
 import lz4.block
 
 # --- Configuration ---
-BASE_DIR = Path(__file__).parent
-ARCI_PATH = BASE_DIR / "game.arci"
-ARCD_PATH = BASE_DIR / "game.arcd"
-DMANIFEST_PATH = BASE_DIR / "game.dmanifest"
-OUTPUT_DIR = BASE_DIR / "output"
+ROOT_DIR = Path(__file__).parent.parent
+GAME_DIR = ROOT_DIR / "game"
+ARCI_PATH = ROOT_DIR / "game.arci"
+ARCD_PATH = ROOT_DIR / "game.arcd"
+DMANIFEST_PATH = GAME_DIR / "game.dmanifest"
+OUTPUT_DIR = ROOT_DIR / "output"
 
 HASH_MAX_LENGTH = 64  # Each hash slot is padded to 64 bytes
 NOT_COMPRESSED = 0xFFFFFFFF

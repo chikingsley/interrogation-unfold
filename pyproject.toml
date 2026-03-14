@@ -1,9 +1,11 @@
 [project]
 name = "interrogation-unfold"
 version = "0.1.0"
-description = "Add your description here"
+description = "Extraction and analysis tools for Interrogation: You Will Be Deceived (Defold game)"
 requires-python = ">=3.13"
 dependencies = [
     "lz4>=4.4.5",
-    "protobuf>=7.34.0",
 ]
+
+[tool.uv]
+dev-dependencies = []

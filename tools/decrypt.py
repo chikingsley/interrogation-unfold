@@ -20,11 +20,12 @@ XTEA_DELTA = 0x9E3779B9
 XTEA_ROUNDS = 32
 MASK32 = 0xFFFFFFFF
 
-BASE_DIR = Path(__file__).parent
-ARCI_PATH = BASE_DIR / "game.arci"
-ARCD_PATH = BASE_DIR / "game.arcd"
-DMANIFEST_PATH = BASE_DIR / "game.dmanifest"
-OUTPUT_DIR = BASE_DIR / "decrypted"
+ROOT_DIR = Path(__file__).parent.parent
+GAME_DIR = ROOT_DIR / "game"
+ARCI_PATH = ROOT_DIR / "game.arci"
+ARCD_PATH = ROOT_DIR / "game.arcd"
+DMANIFEST_PATH = GAME_DIR / "game.dmanifest"
+OUTPUT_DIR = ROOT_DIR / "decompiled"
 
 HASH_MAX_LENGTH = 64
 NOT_COMPRESSED = 0xFFFFFFFF
