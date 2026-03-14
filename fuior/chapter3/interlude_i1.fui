@@ -1,0 +1,54 @@
+load_interlude office_floor
+if has_joseph
+  load_characters jen tab mordecai joseph
+else
+  load_characters jen tab mordecai
+end
+
+wait 2
+show_character tab RIGHT_CENTER listening
+show_character mordecai RIGHT normal
+if has_joseph
+  show_character joseph LEFT neutral
+  show_character jen LEFT_CENTER normal_smile
+else
+  show_character jen LEFT normal_smile
+end
+
+wait 1
+
+jen: [explain_smile] We're getting so close, boss!
+
+tab: [listening] Corroborating everything, the mounting evidence, pushing all the Liberation Front members we've caught, outside sources...
+animate jen normal_smile
+
+if has_joseph
+  joseph: [explaining] We finally have something solid. One Alexa Brown, connected to travel arrangements apparently made for the Front's top leadership.
+  animate tab normal
+else
+  tab: [asking] We have something solid. One Alexa Brown, connected to travel arrangements apparently made for the Liberation Front actual top leadership.
+end
+
+mordecai: [explain] Rumor on the street is that the Front is looking outside the city and country, gathering other radicals for the cause.
+if has_joseph
+  animate joseph neutral
+else
+  animate tab listening
+end
+
+if has_joseph
+  joseph: [what] Trying to bring together under their umbrella all the psychos ready to kill for ideology.
+  animate mordecai normal
+else
+  mordecai: [gun] Trying to bring together under their umbrella all the psychos ready to kill for ideology.
+end
+
+jen: [pointing] We're heading out, to grab Brown.
+if has_joseph
+  animate joseph neutral
+else
+  animate mordecai normal
+end
+
+wait_for_input
+hide_all_characters

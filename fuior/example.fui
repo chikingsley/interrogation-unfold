@@ -1,0 +1,66 @@
+# This is a comment. It's going to be ignored
+# Indentation is not mandatory, but makes things easier to read
+# Blank lines are also ignored. Use them to structure "logical paragraphs" however you wish
+
+# This loads the new scene with the specified background
+load_interlude office_floor
+
+# This describes what characters are going to be used for this scene
+load_characters jen tab
+
+# Shows Jen on the left side with the normal animation
+show_character jen LEFT normal
+
+# Wait one second before showing the first dialogue bubble
+wait 1
+
+# This is how you show a dialogue bubble. The animation in brackets is optional.
+# If another dialogue bubble was shown immediately before this one, this waits for
+# the user to read the previous bubble (implicit wait_for_input) before showing the current one.
+jen: [smile] Hi, Tab!
+
+# Shows Tab on the right side with the worried animation, but only after the user clicks
+wait_for_input
+show_character tab RIGHT worried
+wait 1 # Wait 1 second to allow time for the user to percieve the worried animation
+
+tab: [smile] Hi, Jen!
+
+jen: [neutral] So, how's work?
+animate tab neutral # Run animations independently from dialogue bubbles
+
+# Conditional clause.
+# The else branch is optional
+# End your conditionals with "end"
+if tab_tired
+    # Example of dialogue bubble without animation (character stays on the previous animation)
+    tab: The usual...
+else
+    tab: Great!
+end
+
+tab: Say, what color would you pick for this dossier's color coding?
+
+# A choice! List the choices, one per line, starting with a "*".
+# List any applicable effects under each choice
+# End a choice list with an "end"
+choose
+* Yellow
+    set dossier_yellow
+    jen_approval +1
+
+    jen: [smile] Nice choice! I like Yellow
+    animate tab disgusted
+
+* Red
+    set dossier_red
+
+    tab: [smile] I love red! It's great!
+    animate jen sad
+end
+
+# At the end of the scene, wait for the the user to read the last dialogue bubble
+wait_for_input
+
+# After the user clicks, hide all characters, so that they leave as the scene fades out
+hide_all_characters

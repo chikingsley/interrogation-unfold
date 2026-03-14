@@ -1,0 +1,128 @@
+load_interlude hannigan
+load_characters jen tab mordecai
+
+wait 2
+show_character jen LEFT_CENTER normal_smile
+show_character tab LEFT normal
+show_character mordecai RIGHT proud
+wait 1
+
+jen: [explain_angry] ...psh, no way Louis XVI was a victim.
+
+mordecai: [proud] Had an uncle named Louie. There was nothin' royal about that man.
+animate jen normal
+
+tab: [explain] I'm just saying that he was caught between the pressures of the nobility and -
+
+jen: [explain_smile] Nuh-uh - naw, I'm sticking to my picks!
+animate tab normal
+
+jen: [mega_happy] Kiss M.L.K., Marry Lionheart, Kill Louie XVI. Definitely.
+
+tab: [laugh] Well, I'm confident Richie will make you many many murderous crusader-babies.
+animate jen normal_smile
+
+jen: [normal_smile] Murderous crusader-babies. Has a ring to it.
+animate tab normal
+
+mordecai: [point] Boss's turn!
+
+jen: [explain_smile] Right, let's see, hmm. Kiss, Marry, Kill: Lincoln, Ghandi and umm -
+animate mordecai proud
+
+tab: [asking] Thatcher!
+
+jen: [pointing_smile] Yes! And Margaret Thatcher.
+
+unset kmk_lincoln
+unset kmk_ghandi
+unset kmk_thatcher
+
+choose
+* Hmm, I'll be kissing Lincoln. The man deserves a good night at the theatre.
+  kmk_lincoln = "kiss"
+  hide_bubbles
+  animate jen mega_happy
+  animate tab normal
+  animate mordecai proud
+  jen_approval +5
+
+
+* I think I'll be kissing Ghandi, to see him do the chastity-squirm.
+  kmk_ghandi = "kiss"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab normal
+  animate mordecai point
+  mordecai_approval +5
+
+* Oh, I have to kiss the Iron Lady!
+  kmk_thatcher = "kiss"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+
+end
+
+# hide the one already chosen
+choose
+* [not kmk_lincoln] I'll marry Lincoln, seems like he'd be there for me.
+  kmk_lincoln = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab normal
+  animate mordecai proud
+  evolution +1
+
+* [not kmk_ghandi] I'll marry Ghandi, expecting minimal obligations from the affair.
+  kmk_ghandi = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab normal
+  animate mordecai proud
+  equity +1
+
+
+* [not kmk_thatcher] Marry Thatcher. Definitely want to end up a baron!
+  kmk_thatcher = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  tab_approval +5
+  freedom +1
+end
+
+# hide the ones already chosen
+choose
+* [not kmk_lincoln] ...and unfortunately kill Lincoln. From behind, I imagine.
+  kmk_lincoln = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  mordecai_approval -5
+
+* [not kmk_ghandi] ...and unfortunately kill Ghandi. Martyrdom might do wonders for his cause.
+  kmk_ghandi = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  jen_approval -5
+  equity -1
+
+* [not kmk_thatcher] ...and unfortunately kill Thatcher. I never approved of her policies.
+  kmk_thatcher = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  mordecai_approval -5
+  freedom -1
+end
+
+mordecai: [point] Next round's on me!
+
+wait_for_input

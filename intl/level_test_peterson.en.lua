@@ -1,0 +1,21 @@
+-- luacheck: no max line length
+return {
+  ["level_test_peterson.1"] = "They breathe heavily, startled and displeased.",
+  ["level_test_peterson.2"] = "They groan in pain, giving you a scared look.",
+  ["level_test_peterson.3"] = "They gasp for air, calling for help.",
+  ["level_test_peterson.4"] = "They yell out in pain, insisting that they are innocent.",
+  ["level_test_peterson.5"] = "Switch to exposed idle",
+  ["level_test_peterson.6"] = "Switch to normal idle",
+  ["level_test_peterson.7"] = "Defense (normal/exposed)",
+  ["level_test_peterson.8"] = "Frown (normal)",
+  ["level_test_peterson.9"] = "Headshake (normal)",
+  ["level_test_peterson.10"] = "Nod (normal)",
+  ["level_test_peterson.11"] = "Scared (normal)",
+  ["level_test_peterson.12"] = "Shrug (normal)",
+  ["level_test_peterson.13"] = "Smile (normal)",
+  ["level_test_peterson.14"] = "Sad (exposed)",
+  ["level_test_peterson.15"] = "I have no idea what you're talking about.",
+  ["level_test_peterson.16"] = "They look into your eyes, perhaps a bit worried.",
+  ["level_test_peterson.17"] = "Ok.",
+  ["level_test_peterson.18"] = "They nod.",
+}

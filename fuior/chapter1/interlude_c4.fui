@@ -1,0 +1,37 @@
+load_interlude office_floor
+load_characters jen tab mordecai
+
+wait 2
+show_character tab LEFT aback
+tab: We have three suspects in custody. One of them can potentially be our perp.
+
+show_character jen RIGHT pointing
+jen: The only three we noticed to linger near the Duathlon store.
+
+wait_for_input
+
+show_character mordecai RIGHT_CENTER
+mordecai: That is, before the three of them got tangled up in an incident, and we had to intervene.
+
+tab: [asking] This is detailed in the file I drafted up on the way here.
+animate jen normal
+
+jen: [pointing_angry] One of them is the one working on the Liberation Front's orders. Has to be!
+animate tab normal
+
+if interlude_c_pleased_tab
+  tab: [defensive] New hits of the algorithm indicate over a 90% chance that we're dealing with an IED planted in the mall.
+  animate jen normal_angry
+
+else
+  jen: [mega_dissapointed] I've checked the chat room again. I now think we're dealing with a planted bomb.
+end
+
+jen: [mega_dissapointed] Sweet baby Jesus... We're on the clock, boss.
+animate tab normal
+animate mordecai thinking
+
+tab: [defensive] Lives are at stake. We need the explosive device's location.
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,70 @@
+if pursue_informer and not pursue_informer_triggered
+  set pursue_informer_triggered
+
+  load_interlude office_floor
+
+  if pursue_informer = "jen"
+    load_characters jen
+
+    wait 2
+    show_character jen LEFT normal
+    wait 1
+
+    jen: [normal] Just to let you know, boss, but we found a girl with some potential intel - possibly willing to inform.
+
+    jen: [explain] Though, she hasn't agreed to work with us... yet. We can try and recruit her.
+
+    jen: [normal] Rachel Ezra's her name. Apparently knows someone active in the Front.
+    wait_for_input
+    hide_character jen
+
+  elseif pursue_informer = "joseph"
+    load_characters joseph
+
+    wait 2
+    show_character joseph LEFT neutral
+    wait 1
+
+    joseph: [neutral] We have found a young lady with some intel. She is likely willing to inform.
+
+    joseph: [dismissive] Though, she hasn't agreed to inform... yet. We have to try and recruit her.
+
+    joseph: [neutral] She goes by the name of Rachel Ezra. She declares to be close to someone who is active in the Front.
+
+    wait_for_input
+    hide_character joseph
+
+  elseif pursue_informer = "mordecai"
+    load_characters mordecai
+
+    wait 2
+    show_character mordecai LEFT normal
+    wait 1
+
+    mordecai: [normal] So, we found this girl with some intel. Might talk to us.
+
+    mordecai: [hips] Though, she hasn't agreed to... yet. We should to try to recruit her.
+
+    mordecai: [normal] Rachel Ezra's her name. Says she knows someone who is active in the Front.
+
+    wait_for_input
+    hide_character mordecai
+
+  elseif pursue_informer = "tab"
+    load_characters tab
+
+    wait 2
+    show_character tab LEFT normal
+    wait 1
+
+    tab: [normal] Just to let you know, boss, but we found a girl with some intel - willing to inform.
+
+    tab: [defensive] Though, she hasn't agreed to work with us... yet. We have to try and recruit her.
+
+    tab: [normal] Rachel Ezra's her name. Apparently knows someone active in the Front.
+
+    wait_for_input
+    hide_character tab
+
+  end
+end

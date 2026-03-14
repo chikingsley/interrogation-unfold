@@ -1,0 +1,53 @@
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: As part of leading your team, you'll have to manage budget and assign missions.
+
+if narrative
+dummy: For budgeting, you'll be getting $3000 with each budget round.
+else
+dummy: For budgeting, you'll be getting $2000 with each budget round.
+end
+
+dummy: You can influence your available funds in many ways, and any sums unspent are saved for the next budget round.
+
+dummy: You can assign available agents to missions, on top of their core investigation work for the team.
+
+dummy: How well they'll do is determined by how motivated they are, and how much the task fits their background and expertise.
+
+dummy: I've ordered you an outsourced HR report - it's on me. It should tell you how well the agents might do on missions.
+
+dummy: If you don't buy yourself expanded HR reports in the future, you won't know what their likelihood of success will be.
+
+dummy: Maintaining all facets of the image of your team is key. You need approval, or else you'll lose the team.
+
+dummy: Buying expanded PR reports can help you understand what's causing shifts in your image.
+
+dummy: All set?
+
+choose
+* All set!
+
+* That sounds like a lot. How do I know what the consequences of each choice will be before I make them?
+
+dummy: Uhm. Well, you don't.
+
+dummy: It's your job to evaluate what the consequences and risks of each action and option might be.
+
+dummy: Use your reason, use trial-and-error.
+
+dummy: But this isn't the Police Academy, things are not transparent and don't have fixed and easily predictable effects.
+
+dummy: You think I had any idea hitting on that redhead back in college would mean I now have to go to marriage counselling?
+
+dummy: I had no idea. That's what real life's like.
+
+end
+
+dummy: Good luck.
+
+wait_for_input
+hide_all_characters

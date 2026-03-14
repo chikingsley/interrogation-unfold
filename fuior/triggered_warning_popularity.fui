@@ -1,0 +1,18 @@
+set_preset_music campaign
+
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: Things are not looking good.
+
+dummy: We're receiving actual complaints from the general public about your leadership of the unit.
+
+dummy: Get your act together! Spurred on by the Front, who knows what these people might end up doing.
+
+dummy: That is all.
+
+wait_for_input
+hide_all_characters

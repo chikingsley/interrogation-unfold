@@ -1,0 +1,37 @@
+set_preset_music campaign
+
+load_interlude office_floor
+load_characters jen
+
+wait 2
+
+show_character jen LEFT normal
+
+wait 1
+
+jen: Hey boss, wanted to talk about the interview tapes real quick.
+
+jen: [normal_angry] There's a gap on one of'm. And at least one of the subject is not only telling their lawyer but also the media that you roughed them up during that pause. They might even press charges.
+
+jen: [explain] Look, you're running the show here. I just want you to stay aware that, even if it's their word against yours, there could be consequences if this keeps on repeating.
+
+jen: Authorities might be pressured to fire you. People might start targetting you as a bad guy. We have to be smart, remain the good guys.
+
+choose
+* That'll be quite enough, Jennifer. I don't need a lecture, I need you to do good police work.
+  jen: [mega_dissapointed] Right... Will, uh - will do.
+  jen_approval -5
+
+* Jennifer, look, I'm going to be doing my absolute best to save people. If that means my job or looking bad, so be it.
+  jen: [explain_angry] Understood. I'll get back to work.
+  popularity +5
+
+* You're right. I need to be careful about these things. There's no point to any of this if we become the bad guys.
+  jen: [explain_smile] Glad to hear it, boss. I'll get back to work.
+  jen_approval +5
+end
+
+wait_for_input
+hide_all_characters
+
+commit_stats interlude

@@ -1,0 +1,42 @@
+if co_overtime_count = 2 and not co_triggered
+  set co_triggered
+
+  set_preset_music campaign
+
+  load_interlude office_floor
+  load_characters tristan
+
+  wait 2
+  show_character tristan LEFT normal
+  wait 1
+
+  tristan: [explain] Mayor Patel wanted me to congratulate you on the community outreach your department has been doing.
+
+  tristan: [thumbs_up] It's initiatives like yours that give the police department and all of us a good name.
+
+  choose
+  * Be sure to drop a hint of what we do to the press, when you have the opportunity. Consider us even.
+    hide_bubbles
+    animate tristan normal
+    press +5
+    wait 2
+
+  * Well, I don't do it for you, I do it because we need to encourage more good cops to take up the fight.
+    hide_bubbles
+    animate tristan arms_crossed
+    authorities +5
+    wait 2
+
+  * There's no better expression of gratitude than a budget boost, my friend.
+    hide_bubbles
+    animate tristan glasses
+    budget +1000
+
+    wait 1
+    tristan: [explain] We'll see how we can help then.
+    wait_for_input
+  end
+
+  hide_all_characters
+  commit_stats interlude
+end

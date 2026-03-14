@@ -1,0 +1,44 @@
+load_interlude office_floor
+load_characters chief eddie eddie2
+
+wait 2
+show_character chief LEFT normal
+wait 1
+
+chief: We've got a reporter in. I'm gonna' ask you to try and answer a few of his questions.
+
+chief: [asking] This is Eddie Walker, from the Heraldic.
+show_character eddie RIGHT bye
+
+eddie: [skeptical] Greetings, officer.
+animate chief normal
+
+eddie: [writing_interested] Are you ready to get started?
+
+chief: I'll leave you to it.
+
+wait_for_input
+hide_character chief
+
+choose
+* Let's make this snappy.
+  press -5
+  animate chief thinking
+  animate eddie dunno
+
+* Let me get my files first - in case I need to give details.
+  press +5
+  lawful +1
+  animate chief normal
+  animate eddie thinking
+
+* Let me clear the room first - make sure we have some privacy.
+  press +5
+  authorities +5
+  jen_approval -5
+  tab_approval -5
+  animate chief normal
+  animate eddie writing_interested
+end
+
+wait 1

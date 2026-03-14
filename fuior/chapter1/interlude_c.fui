@@ -1,0 +1,67 @@
+load_interlude office_floor
+load_characters jen tab
+
+wait 2
+show_character tab RIGHT normal
+show_character jen LEFT normal_smile
+wait 1
+
+jen: [explain] Great job in there, boss!
+jen: [normal] Now that we were logged in, even for a second, we can analyze what they've been talking. At a first glance they seem to be using code-words.
+
+tab: [explain] I can set up a smart algorithm that can detect possible meanings from the contextual usage of words.
+
+jen: [pointing] Or... we could simply try to figure it out directly.
+animate tab normal
+
+choose
+* I don't trust algorithms. Jennifer, look at their conversations and try to figure out what they've been talking about.
+  set interlude_c_pleased_jen
+  hide_bubbles
+  animate jen normal_smile
+  animate tab defensive
+  jen_approval +5
+  tab_approval -5
+
+* Codes may be deceiving to the naked eye. Let the algorithms do the work. Tell me what pops up.
+  set interlude_c_pleased_tab
+  hide_bubbles
+  animate jen normal_angry
+  animate tab listening
+  jen_approval -5
+  tab_approval +5
+
+* Do both. Set up the algorithms and also try to figure things out manually.
+  set interlude_c_hesitated
+
+  tab: [defensive] This will mean that both of us will be busy working on this. We may have a hard time responding to other issues that pop up.
+  animate jen normal_angry
+
+  choose
+  * Do both anyway. We'll see what bites.
+    set interlude_c_did_both
+    hide_bubbles
+    animate jen normal_smile
+    animate tab defensive
+    tab_approval -5
+
+  * Fine, forget the algorithms then. Intuition will be our weapon.
+    set interlude_c_pleased_jen
+    hide_bubbles
+    animate jen normal_smile
+    animate tab disgust
+    jen_approval +5
+    tab_approval -5
+
+  * Okay, let the computer do the work then.
+    set interlude_c_pleased_tab
+    hide_bubbles
+    animate jen normal_angry
+    animate tab listening
+    jen_approval -5
+    tab_approval +5
+  end
+end
+
+wait 2
+hide_all_characters

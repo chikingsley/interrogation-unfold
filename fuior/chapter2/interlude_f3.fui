@@ -1,0 +1,30 @@
+load_interlude office_floor
+load_characters jen
+
+wait 2
+show_character jen LEFT
+
+wait 1
+
+jen: [normal] Only Benno Weiss they couldn't get - yet. We're sure he's in hiding with his uncle - out of state - so it might be a while.
+
+jen: [explain] But the other three are in. Full-time mom Linda Bailey seemed to have handled our security guard Wilson.
+
+jen: [explain_angry] Anton Drasko, porn producer, seemed to have provided the explosives for Father Gabriel.
+
+jen: [explain] And Helene Koufos, a yoga instructor, was in very close contact with our hostage-taker Cassandra Higgs.
+
+jen: [explain] Helene is deaf-mute, so we brought in an interpreter for you.
+
+jen: [pointing] Tab's prepped you the case files on them.
+
+jen: [pointing] They're all set to go in the interrogation rooms.
+
+jen: [pointing_angry] Crazy thing is, they didn't even fight it. They've already confessed to being with the Front. All three. 
+
+jen: [pointing_angry] So, the stakes here are whether you can extract from them the next move The Liberation Front will make.
+
+jen: [normal_smile] Go get'm!
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,164 @@
+##triggers right after e2
+
+load_interlude office_floor
+load_characters tab
+
+wait 2
+show_character tab LEFT normal
+
+wait 1
+
+tab: [normal] Greetings.
+
+tab: [asking] In light of some of the recent developments, it occured to me that there was a personal aspect best disclosed - for the record.
+
+tab: [defensive] It has to do with my background.
+
+tab: [defensive] I wanted you to know that during college I was a part of a group that subscribed to an... anti-authority political outlook.
+
+if tab_approval >= 70
+  tab: [defensive] We did some gray hat hacktivism. Revealed some dirt on politicians.
+
+  tab: [explain] We always made sure that the things we did were technically legal. Even if they were not necessarily moral, as I can now see, looking back.
+
+  tab: [explain] Evidently, I hold none of those views today.
+
+  choose
+  * Hell, Thompson, that's not even in your file. Why would you go and tell me this?
+    tab_approval -10
+    lawful -1
+    freedom +1
+
+    tab: [aback] In the interest of transparency? To ensure you have all relevant information?
+
+  * I appreciate the disclosure. You transparency on the matter is appreciated, and I will consider it past and moot.
+    tab_approval +5
+    lawful +1
+
+
+    tab: [normal] Thank you. It is.
+
+  * That's worrisome, Tab. Makes it hard to trust you with sensitive tasks - given our enemy.
+    tab_approval -10
+    justice +1
+
+    tab: [indignant] I understand.
+
+    tab: [indignant] Regardless, my technical skills remain at your disposal. Even if you wish me not to interact with the Liberation Front anymore.
+  end
+
+else
+  tab: [indignant] Evidently, I hold none of those views today.
+
+  choose
+  * Did you do anything illegal as a part of this group?
+    tab_approval -5
+    justice +1
+    lawful +1
+
+    tab: [indignant] No. Technically not.
+
+    tab: [defensive] It's in the past.
+
+  * Hell, Thompson, that's not even in your file. Why would you go and tell me this?
+    tab_approval -10
+    lawful -1
+    freedom +1
+
+    tab: [aback] In the interest of transparency? To ensure you have all relevant information?
+
+  * That's worrisome, Tab. Makes it hard to trust you with sensitive tasks - given our enemy.
+    tab_approval -10
+    justice +1
+
+    tab: [indignant] I understand.
+
+    tab: [indignant] Regardless, my technical skills remain at your disposal. Even if you wish me not to interact with the Liberation Front anymore.
+  end
+end
+
+if tab_declassified
+  choose
+  * We'll leave it at that. Let's focus on the task at hand.
+
+    tab: [normal] Very well.
+
+  * By the way, about Cape Industries, in your declassified file?
+    animate tab aback
+    hide_bubbles
+    wait 1
+
+    tab: [defensive] What of it?
+
+    choose
+    * You're dangerous with a cause. I'm glad you're on our team and not with the Front.
+      tab_approval -10
+      justice +1
+      freedom -1
+      equity -1
+      evolution -1
+
+      tab: [disgust] I didn't put the arbitrary people I happened to be born from above basic moral responsibilities. I hope that such a fact doesn't make me dangerous.
+
+    * The sort of commitment to justice and bravery you showed there - I know I can trust you.
+      tab_approval +5
+      lawful +1
+      justice +1
+
+      tab: [listening] To me, to keep silent about wrongdoing is simply to be an accomplice.
+
+      tab: [listening] Thank you for that trust.
+
+    * You even turned in your own family. Do they know you squaled on them? How do I know I can trust you?
+      animate tab disgust
+      hide_bubbles
+      wait 1
+      tab_approval -20
+
+      tab: [aback] They do not - no.
+
+      tab: [indignant] The family we get is an arbitrary biological incident.
+
+      tab: [indignant] Subscribing to well-considered moral values is what advances civilization. It is the only merit we can have.
+
+      tab: [listening] You should trust me for my commitment to those values.
+
+      tab: [disgust] If it's blind loyalty you want from your team, I can't offer that.
+    end
+
+  * Keep away from your anarchist friends at least until this operation's over, will you?
+    animate tab disgust
+    hide_bubbles
+    wait 1
+    tab_approval -10
+    justice +1
+
+    tab: [indignant] I do not maintain social contact with any of the friends from that era.
+
+    tab: [listening] But noted. I shall minimize contact with anyone that doesn't subscribe to the political mainstream.
+
+    tab: [indignant] Because the lead detective said so.
+  end
+
+else
+  choose
+  * We'll leave it at that. Let's focus on the task at hand.
+    tab: [normal] Very well.
+
+  * Keep away from your anarchist friends at least until this operation's over, will you?
+    animate tab disgust
+    hide_bubbles
+    wait 1
+    tab_approval -10
+    justice +1
+
+    tab: [indignant] I do not maintain social contact with any of the friends from that era.
+
+    tab: [listening] But noted. I shall minimize contact with anyone that doesn't subscribe to the political mainstream.
+
+    tab: [indignant] Because the lead detective said so.
+  end
+end
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,45 @@
+load_interlude street
+load_characters jen
+
+wait 2
+
+show_character jen RIGHT normal
+
+wait 1
+
+jen: [explain_smile] Hey, boss?
+
+jen: [explain] I'm going to meet the others at Hannigan's.
+
+jen: [explain] Try to get our minds off this craziness for a couple of hours before it all starts again tomorrow.
+
+jen: [explain_smile] Want to join?
+
+
+choose
+* [insanity >= 3] <insanity>Nah, I uh. I need to go home listen to my thoughts. Decide which way the threads of fate are pulling after all this.</insanity>
+  jen: [normal_angry] Erm. Alright then. Have some good, uh, soul searching.
+  wait_for_input
+
+
+* [insanity < 3] No can do, sorry. I want to be in fresh in the morning tomorrow to get some paperwork sorted. But you try to have fun.
+  authorities +5
+  animate jen normal_smile
+  # do not go to hannigan1 next
+
+
+* Sure, lead the way.
+  animate jen normal_smile
+  tab_approval +5
+  jen_approval +5
+  mordecai_approval +5
+  set hannigan1
+  # fade to black: Text: Later that evening
+  # go to hannigan1 next
+end
+
+hide_bubbles
+wait 1
+
+hide_all_characters
+commit_stats interlude

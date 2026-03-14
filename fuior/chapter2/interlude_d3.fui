@@ -1,0 +1,24 @@
+load_interlude office_floor
+load_characters mordecai
+
+wait 2
+
+show_character mordecai RIGHT
+wait 1
+
+mordecai: [thinking] So, we have some good news and some bad news.
+
+mordecai: [proud] Good news is they had elevator cameras. They're set to take pictures after each press of a button.
+
+mordecai: [proud] There seems to have been a single press to go the 13th floor.
+
+mordecai: [normal] Bad news is they weren't stored digitally, but printed. Crazy old-school security manager.
+
+mordecai: [thinking] And the picture corresponding to the button press we're interested in was missing, of course. Foul play likely.
+
+mordecai: [point] But! After several hours of trash-digging, pardon if I smell, I was able track down these scraps.
+
+mordecai: [point] I brought them with me...
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,17 @@
+load_interlude office_floor
+load_characters jen tab mordecai
+
+wait 2
+show_character jen LEFT
+show_character tab RIGHT
+show_character mordecai RIGHT_CENTER
+wait 1
+
+tab: [defensive] We've narrowed down a list of four perps that are virtually certain LF members. The evidence is overwhelming.
+
+jen: [explain]  Benno Weiss. Then, Anton Drasko. Lynda Bailey. And Helene Koufos. Each one of the last three is linked to one of the attempted bombings.
+
+mordecai: [proud] The prosecutors agreed. We can book them on the face-value of the evidence alone. So, get ready to question.
+
+wait_for_input
+hide_all_characters

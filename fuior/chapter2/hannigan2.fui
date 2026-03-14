@@ -1,0 +1,137 @@
+load_interlude hannigan
+if has_joseph
+  load_characters jen tab mordecai joseph
+else
+  load_characters jen tab mordecai
+end
+
+wait 2
+show_character jen LEFT_CENTER normal_smile
+show_character tab LEFT normal
+show_character mordecai RIGHT proud
+if has_joseph
+  show_character joseph RIGHT_CENTER neutral
+end
+wait 1
+
+mordecai: [thinking] ...mayor Patel's just way too hot. She has to be the Kiss!
+
+tab: [listening] I'm confident in picking her for Marry.
+animate mordecai proud
+
+if has_joseph
+  joseph: [concern] So, you're killing Damascus Reed? Seems like a waste of the many millions in his accounts?
+  wait_for_input
+  animate joseph neutral
+else
+  jen: [explain] So, you're killing Damascus Reed? Why not Marry instead into all that start-up millionaire money?
+  wait_for_input
+  animate jen normal_smile
+end
+
+tab: [indignant] Oh, I'm sure. He remains in the Kill category.
+
+tab: [asking] Boss, your go. And since we're doing people in high places...
+
+tab: [asking] Kiss, Marry, Kill. Chief Anderson, Patricia Becker with the Heraldic -
+
+mordecai: [proud] Nice!
+
+tab: [explain] - and Tristan, that guy from City Hall!
+
+if has_joseph
+  joseph: [smile] Who's it going to be?
+else
+  jen: [pointing_smile] Who's it gonna' be?
+end
+animate tab normal
+
+unset kmk_chief
+unset kmk_patricia
+unset kmk_tristan
+
+choose
+* Hmm, I'll be kissing Chief Anderson. Aggressively.
+  kmk_chief = "kiss"
+  hide_bubbles
+  animate jen mega_happy
+  animate tab normal
+  animate mordecai proud
+  jen_approval +5
+
+* I have to kiss Patricia Becker. She's a fit lady.
+  kmk_patricia = "kiss"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab normal
+  animate mordecai point
+  mordecai_approval +5
+
+* Kissing Tristan. He's a fit gentleman.
+  kmk_tristan = "kiss"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+
+end
+
+if has_joseph
+  animate joseph neutral
+end
+
+choose
+* [not kmk_chief] I'll marry Chief Anderson Seems like he'd be a good dad.
+  kmk_chief = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab normal
+  animate mordecai proud
+
+* [not kmk_patricia] I'll marry Patricia Becker. Maybe improve our press coverage.
+  kmk_patricia = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab normal
+  animate mordecai proud
+  jen_approval +5
+
+* [not kmk_tristan] Marry Tristan. That boy has a bright political future.
+  kmk_tristan = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  tab_approval +5
+end
+
+choose
+* [not kmk_chief] ...And unfortunately kill the Chief. By elimination of the other options.
+  kmk_chief = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab normal
+  animate mordecai proud
+  tab_approval -5
+
+* [not kmk_patricia] ...And unfortunately kill miss Becker. By elimination of the other options.
+  kmk_patricia = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai normal
+  mordecai_approval -5
+
+* [not kmk_tristan] ...And unfortunately kill Tristan. By elimination of the other options.
+  kmk_tristan = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  jen_approval -5
+end
+
+jen: [pointing_smile] Oh, that bigger table has cleared. Let's move over!
+
+wait_for_input
+hide_all_characters

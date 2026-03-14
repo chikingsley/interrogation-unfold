@@ -1,0 +1,47 @@
+if total_torture_damage > (last_checked_torture_damage or 0)
+  set_preset_music campaign
+
+  last_checked_torture_damage = total_torture_damage
+
+  load_interlude chief_office
+  load_characters dummy
+
+  show_character dummy CHIEF false chief
+  wait 2
+
+  dummy: Come in for a second.
+
+  dummy: I've been reviewing your interrogation tapes.
+
+  dummy: Care to explain why there are gaps on them?
+
+  choose
+  * Oh. I thought it'd be best not to record hurting the suspects.
+    authorities -5
+    dummy: ...I'll just assume that was sarcasm.
+
+  * Oh, uhm. I had some technical problems.
+    if tortured_peterson
+      dummy: Well, that's not what Peterson is saying. He's telling people you hurt him.
+    elseif tortured_jerry
+      dummy: Well, that's not what Cox is saying. He's telling people you hurt him.
+    else
+      # In theory, this should never be reached
+      dummy: Well, that's not what they're saying. They're telling people you hurt them.
+    end
+
+  * I have no idea why there'd be any gaps.
+    dummy: Well, in the future, make sure that recorder is working throughout.
+
+  end
+
+  dummy: Any accusations they make about being hurt become more credible when there are gaps in the recording.
+
+  dummy: Be dead careful about that.
+
+  dummy: That's all.
+
+  wait_for_input
+  hide_all_characters
+  commit_stats interlude
+end

@@ -1,0 +1,23 @@
+-- luacheck: no max line length
+return {
+  ["level_test_lucas.1"] = "They breathe heavily, startled and displeased.",
+  ["level_test_lucas.2"] = "They groan in pain, giving you a scared look.",
+  ["level_test_lucas.3"] = "They gasp for air, calling for help.",
+  ["level_test_lucas.4"] = "They yell out in pain, insisting that they are innocent.",
+  ["level_test_lucas.5"] = "Let's talk about something else.",
+  ["level_test_lucas.6"] = "teroare",
+  ["level_test_lucas.7"] = "da",
+  ["level_test_lucas.8"] = "ridicare din umeri",
+  ["level_test_lucas.9"] = "repulsie",
+  ["level_test_lucas.10"] = "nu",
+  ["level_test_lucas.11"] = "fute-te pe tine",
+  ["level_test_lucas.12"] = "uite-te in jur",
+  ["level_test_lucas.13"] = "aranjeaza-ti parul",
+  ["level_test_lucas.14"] = "da lung",
+  ["level_test_lucas.15"] = "umeri uite-te in jur",
+  ["level_test_lucas.16"] = "uite-te in jur negativ",
+  ["level_test_lucas.17"] = "I have no idea what you're talking about.",
+  ["level_test_lucas.18"] = "They look into your eyes, perhaps a bit worried.",
+  ["level_test_lucas.19"] = "Ok.",
+  ["level_test_lucas.20"] = "They nod.",
+}

@@ -1,0 +1,54 @@
+load_interlude office_floor
+load_characters jen
+
+wait 2
+show_character jen LEFT normal
+
+wait 1
+
+jen: [explain_angry] Koufos is extremely shady.
+
+jen: [explain_angry] She had been asking plenty of questions about the final bomb site, both online and offline.
+
+jen: [normal_angry] Even visits to the site for thinly-veiled reasons.
+
+jen: [explain_angry] Clients of her yoga studio reported that she tried to interest them in an organization which wanted "to make a new world".
+
+jen: [explain_angry] We have a strong suspicion about who she might be on the chatroom - even though it's gone quite quiet.
+
+jen: [normal_angry] So, I think we have a slam-dunk Liberation Front member in our grasp.
+
+choose
+* Probably a false flag, but bring them in to check.
+  hide_bubbles
+  animate jen mega_dissapointed
+  jen_approval -10
+  evolution +1
+  freedom +1
+  equity +1
+
+* Ugh, finally! Bring them in!
+  hide_bubbles
+  animate jen normal
+  jen_approval +0
+  justice +1
+
+* Fuck yea! Interrogation time!
+  hide_bubbles
+  animate jen normal_smile
+  jen_approval +5
+  justice +1
+end
+
+jen: [pointing] Well, I've already sent a squad to bring her in. She seems absent from the regular locations for a few hours now.
+
+jen: [pointing_smile] So, it might be a while. But I have other good news.
+
+jen: [explain] Koufos has had a lot of contact with one Cassandra Higgs.
+
+jen: [explain_angry] Meetings, money transfers, contact between the two spiked significantly before the attacks.
+
+jen: [explain] So, while we look for Koufos, I'll grab Morty and try to find Higgs.
+
+wait_for_input
+hide_all_characters

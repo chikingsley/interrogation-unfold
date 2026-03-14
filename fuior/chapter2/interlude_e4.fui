@@ -1,0 +1,48 @@
+load_interlude office_floor
+if has_joseph
+  load_characters tab joseph
+else
+  load_characters tab
+end
+
+wait 2
+if has_joseph
+  show_character tab RIGHT
+  show_character joseph LEFT concern
+else
+  show_character tab LEFT
+end
+wait 1
+
+tab: [explain] We have a situation. Jen called.
+
+tab: [defensive] She and Mordecai found Higgs.
+
+tab: [defensive] From the little they got by talking to her, they identified a very suspicious friend with her too, one Lucas Romano.
+
+tab: [asking] He seemed extremely nervous talking to the police, and when the two suspects had a window, they bolted.
+
+tab: [aback] There was a chase. The two of them, who seem to be armed, have holed up in an arbitrary establishment - a veterinary office.
+
+if insanity >= 5
+  choose
+  * <insanity>C-can't we just - just fucking gun the bastards down?! </insanity>
+    tab_approval -5
+    justice +2
+  end
+end
+
+tab: [aback] They have hostages. Two it seems. They are making demands.
+
+tab: [explain] We have a line in. We'll put you on a call with them.
+
+tab: [defensive] I've lined up the case files. Morty is bringing you the perp's boyfriend urgently. One Amatis Garcia.
+
+tab: [defensive] If you obtain the release of hostages or one of the perps, it'll take a while, but we'll bring them right in for you to question.
+
+if has_joseph
+  joseph: [concern] Detective, it's key that you get as much time from this Higgs as possible. You need to build a rapport with her.
+end
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,68 @@
+if recruited_joseph and not recruited_joseph_triggered
+  set recruited_joseph_triggered
+
+  set_preset_music campaign
+
+  load_interlude office_floor
+  load_characters jen tab mordecai joseph
+
+  wait 2
+  show_character jen LEFT_CENTER normal
+  show_character tab LEFT normal
+  show_character mordecai CENTER_LEFT normal
+  show_character joseph RIGHT neutral
+  wait 1
+
+  set has_joseph
+  joseph_approval = 95
+
+  choose
+  * Team, I'd like you to meet Mr. Ward, here to help us despite his retirement.
+    hide_bubbles
+    animate jen normal_angry
+    animate tab indignant
+    animate mordecai normal
+    animate joseph concern
+    mordecai_approval +5
+    joseph_approval -5
+    jen_approval -5
+
+    wait 1
+    joseph: [concern] Please, call me Joseph, or Joe.
+    wait_for_input
+    animate joseph neutral
+
+  * Team, please meet Joseph. He's an old-school terrorist-squasher, here to aid us in crushing the Front.
+    hide_bubbles
+    animate jen normal
+    animate tab indignant
+    animate mordecai proud
+    animate joseph neutral
+    mordecai_approval +5
+    tab_approval -5
+
+    wait 1
+
+  * Joseph Ward, this is the team. Team, this is Joseph. He'll be joining us to improve our field work.
+    hide_bubbles
+    animate jen normal
+    animate tab normal
+    animate mordecai hips
+    animate joseph smile
+    mordecai_approval -5
+    joseph_approval +5
+
+    wait 1
+  end
+
+  jen: [normal_smile] Welcome, Joseph.
+
+  mordecai: [proud] It's great to have some reinforcements.
+
+  tab: [normal] Your resume is quite impressive; your contributions may be invaluable.
+
+  joseph: [smile] Thank you kindly for having me. It's daunting, yet thrilling, to be back.
+
+  wait_for_input
+  hide_all_characters
+end

@@ -1,0 +1,148 @@
+##triggers right after h1, AND hannigan's3
+if has_joseph
+  set_preset_music campaign
+
+  load_interlude office_floor
+  load_characters joseph
+
+  wait 2
+  show_character joseph LEFT what
+
+  wait 1
+
+  joseph: [what] It's time to talk.
+
+  joseph: [dismissive] You're coming up on the leadership, nearing the end-game.
+
+  joseph: [dismissive] You're not going to get a lot of attempts at cracking them.
+
+  joseph: [explaining] Chances are, whoever's leading this, that they're powerful people.
+
+  joseph: [explaining] The Burgundy Riots were supposedly a student movement.
+
+  joseph: [dismissive] Bullshit.
+
+  joseph: [dismissive] Ringleaders using impressionable youth for their own ends.
+
+  joseph: [what] So, if you do get them, you have to be ready to act...
+
+  joseph: [angry_point] ...decisively, during the very small window of time that you'll have them.
+
+  if joseph_approval >= 70
+    choose
+    * Do you mean... acting extrajudicially?
+      lawful +1
+
+      joseph: [sad] Well, yes.
+
+      joseph: [explaining] Technically, yes. If you allow them play the system, they will do it.
+
+      joseph: [concern] They can do so much damage - even from inside a cell.
+
+      joseph: [dismissive] Not that you'll ever get them in jail.
+
+      joseph: [concern] They will either win their trial, or end up off the map.
+
+      joseph: [dismissive] So, if it happens that after you get conclusive proof on them, they perish...
+
+      joseph: [dismissive] ... considered it mission accomplished.
+
+    * What would you recommend I do?
+      joseph_approval +5
+
+      joseph: [concern] They can do so much damage even from inside a cell.
+
+      joseph: [dismissive] Not that you'll ever get them in jail.
+
+      joseph: [concern] They either win their trial, or end up off the map.
+
+      joseph: [dismissive] So, if it happens that after you get conclusive proof on them, they perish...
+
+      joseph: [dismissive] ... considered it mission accomplished.
+
+    * What did you do to end the Burgundy Riots?
+      joseph_approval +5
+
+      joseph: [dismissive] I had the evidence I needed to prove them guilty.
+
+      joseph: [concern] And looked the other way as an escape attempt was foiled.... with the use of lethal force.
+
+      joseph: [explaining] Because you have to understand.
+
+      joseph: [concern] They can do so much damage even from inside a cell.
+
+      joseph: [dismissive] Not that you'll ever get them in jail.
+
+      joseph: [concern] They either win their trial, or end up off the map.
+
+      joseph: [dismissive] So, if it happens that after you get conclusive proof on them, they perish...
+
+      joseph: [dismissive] ... considered it mission accomplished.
+    end
+  else
+    choose
+    * Do you mean... acting extrajudicially?
+      joseph_approval -5
+      lawful +1
+
+      joseph: [sad] Erm... no, no.
+
+      joseph: [what] But if it happens that they resist arrest, or attempt escape...
+
+      joseph: [smile] Well, a response using lethal force would fix a lot of problems.
+
+    * What would you recommend I do?
+      joseph: [concern] They can do so much damage even from inside a cell.
+
+      joseph: [dismissive] Not that you'll ever get them in jail.
+
+      joseph: [concern] They either win their trial, or end up off the map.
+
+      joseph: [concern] But if it happens that they resist arrest or attempt to escape...
+
+      joseph: [smile] Well, a response using lethal force would fix a lot of problems.
+
+    * What did you do, to end the Burgundy Riots?
+      joseph: [concern] The leader we captured attempted to escape.
+
+      joseph: [dismissive] He died during that attempt.
+
+      joseph: [dismissive] And that was the real end to things.
+
+      joseph: [what] Until the Liberation Front showed up, anyway.
+
+      joseph: [explaining] So, a sudden end can be a good end...
+    end
+  end
+
+  choose
+  * I appreciate your directness and council, Joseph, even if I'm not sure that I agree.
+    joseph_approval +5
+    justice -1
+
+    joseph: [dismissive] Keep it in mind.
+
+* You're right. Once I have them proven as guilty, I need to see them ended - whatever the personal cost.
+    justice +3
+
+    joseph: [angry_point] Go get'm, officer.
+
+* This is an outrageous proposition! How are you not worried about me reporting you after all this?!
+    joseph_approval -20
+    justice -4
+    lawful +2
+
+    joseph: [smile] At my age? What could happen to me?
+
+    joseph: [what] Getting fired? Disgraced? Jailed?
+
+    joseph: [smile] I don't care.
+
+    joseph: [concern] But I do care that this new Riot, this Front, is ended.
+
+    joseph: [angry_point] And you should be focusing on that too.
+  end
+end
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,113 @@
+set_preset_music campaign
+
+load_interlude office_floor
+
+if recruit_informer = "jen"
+  load_characters jen informer
+
+  wait 2
+  show_character jen LEFT normal
+  wait 1
+
+  jen: [pointing_smile] She wasn't easy to get, but I'd like you to meet the lovely Rachel Ezra.
+
+  wait_for_input
+  hide_bubbles
+  show_character informer RIGHT staring
+  wait 1
+
+  informer: [hands_together] Hi.
+
+  jen: [pointing] She has some relevant second-hand intel about the Front for us.
+  animate informer look_down
+
+  jen: [explain] I'll leave you to it.
+
+  wait_for_input
+  hide_character jen
+
+elseif recruit_informer = "joseph"
+  load_characters joseph informer
+
+  wait 2
+  show_character joseph LEFT neutral
+  wait 1
+
+  joseph: [dismissive] This young lady is Rachel Ezra.
+
+  wait_for_input
+  hide_bubbles
+  show_character informer RIGHT staring
+  wait 1
+
+  informer: [hands_together] Hi.
+
+  joseph: [neutral] She has some relevant second-hand intel about the Front for us.
+  animate informer look_down
+
+  joseph: [dismissive] I'll leave you to it.
+
+  wait_for_input
+  hide_character joseph
+
+elseif recruit_informer = "mordecai"
+  load_characters mordecai informer
+
+  wait 2
+  show_character mordecai LEFT normal
+  wait 1
+
+  mordecai: [hips] This is our new informer, Rachel Ezra.
+
+  wait_for_input
+  hide_bubbles
+  show_character informer RIGHT staring
+  wait 1
+
+  informer: [hands_together] Hi.
+
+  mordecai: [gun] She has some relevant second-hand intel about the Front for us.
+  animate informer look_down
+
+  mordecai: [proud] I'll leave you to it.
+
+  wait_for_input
+  hide_character mordecai
+
+elseif recruit_informer = "tab"
+  load_characters tab informer
+
+  wait 2
+  show_character tab LEFT normal
+  wait 1
+
+  tab: [asking] This is Rachel Ezra, Detective.
+
+  wait_for_input
+  hide_bubbles
+  show_character informer RIGHT staring
+  wait 1
+
+  informer: [hands_together] Hi.
+
+  tab: [explain] She has some relevant second-hand intel about the Front for us.
+  animate informer look_down
+
+  tab: [indignant] I'll leave you to it.
+
+  wait_for_input
+  hide_character tab
+
+end
+
+choose
+* Coffee? Water?
+  informer: [scared] No, I'm good. Let's just get this over quick, please.
+* Have a seat. Ready?
+  informer: [scared] Mhm. What do you need to know?
+* There's no need to be nervous.
+  informer: [scared] If you say so.
+end
+
+wait_for_input
+hide_all_characters

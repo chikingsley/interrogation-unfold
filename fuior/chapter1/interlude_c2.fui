@@ -1,0 +1,29 @@
+if interlude_c_pleased_jen or interlude_c_did_both
+  load_interlude office_floor
+  load_characters jen tab
+
+  wait 2
+  show_character jen LEFT normal_smile
+  show_character tab RIGHT normal
+  wait 1
+
+  jen: I've been at it for a while now, and I've managed to figure out what most keywords mean.
+
+  if interlude_c_did_both
+    tab: [defensive] The algorithm managed to confirm some of these deductions. There are some conflicts though, either because of cognitive biases or of algorithm errors.
+  end
+
+  jen: [normal] It's hard to figure out specifics, but we have some broad findings.
+  animate tab normal
+
+  jen: The folks in the chat room are just a wing of the whole operation, though.
+
+  jen: [normal_angry] And I think I've stumbled onto something big. The Southbank Mall, sometime today, the planting of "a package".
+
+  jen: [pointing_angry] In front of the Duathlon store. Apparently they'll have someone there. I'm not sure what they're supposed to do, though.
+
+  tab: [defensive] We should have the place canvased ASAP. Let's move.
+
+  wait_for_input
+  hide_all_characters
+end

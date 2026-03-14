@@ -1,0 +1,33 @@
+load_interlude office_floor
+load_characters mordecai
+
+wait 2
+show_character mordecai RIGHT normal
+wait 1
+
+mordecai: [gun] Boss! We're headed to Hannigan's. Comin'?
+
+choose
+* No can do, sorry. I'm supposed to go to this charity dinner thing. Have fun.
+  press +5
+  equity +1
+  #do not go to hannigan3 next
+
+* Sure, go on ahead and I'll catch up with you there!
+  tab_approval +5
+  jen_approval +5
+  mordecai_approval +5
+  joseph_approval +5
+  freedom +1
+  set hannigan3
+  #fade to black: Text: Later that evening
+  #go to hannigan3 next
+
+end
+
+hide_bubbles
+animate mordecai normal
+wait 1
+
+hide_all_characters
+commit_stats interlude

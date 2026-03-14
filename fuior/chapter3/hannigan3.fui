@@ -1,0 +1,159 @@
+load_interlude hannigan
+if has_joseph
+  load_characters jen tab mordecai joseph
+else
+  load_characters jen tab mordecai
+end
+
+wait 2
+show_character jen LEFT_CENTER normal_smile
+show_character tab LEFT normal
+show_character mordecai RIGHT proud
+if has_joseph
+  show_character joseph RIGHT_CENTER smile
+end
+wait 1
+
+if has_joseph
+  joseph: [smile] I have one for you, fearless leader!
+
+  joseph: [smile] Kiss, Marry, Kill - one of these younger members of your team.
+
+  joseph: [concern] If this doesn't offend anyone, that is.
+
+  jen: [explain_smile] Heh, it's fine.
+
+  joseph: [smile] Jen, Morty and Tab.
+else
+  mordecai: [thinking] ...totally. Kiss Tab, Marry Jen, Kill the boss.
+
+  mordecai: [hips] Sorry boss, heh.
+
+  tab: [indignant] Well, I am not babysitting any resulting kids, I can tell you that.
+
+  jen: [pointing_smile] Boss's turn! Three of us. Kiss, Marry, Kill.
+
+  tab: [normal] We promise not to take it personally.
+end
+
+unset kmk_jen
+unset kmk_tab
+unset kmk_mordecai
+
+choose
+* Hmm, I'll be kissing Jen, can't say no to that warmth.
+  kmk_jen = "kiss"
+  hide_bubbles
+  animate jen mega_happy
+  animate tab normal
+  animate mordecai proud
+  if has_joseph
+    animate joseph smile
+  end
+  jen_approval +5
+
+* I have to kiss Tab, I suspect much technique can be learned in the process.
+  kmk_tab = "kiss"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  if has_joseph
+    animate joseph smile
+  end
+  tab_approval +5
+
+* Kissing Mordecai, seems like he'd hold me with respectful safety.
+  kmk_mordecai = "kiss"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab indignant
+  animate mordecai proud
+  if has_joseph
+    animate joseph smile
+  end
+  mordecai_approval +5
+
+end
+
+choose
+* [not kmk_jen] I'll marry Jen, seems like she could educate the heck out of kids.
+  kmk_jen = "marry"
+  hide_bubbles
+  animate jen pointing_smile
+  animate tab normal
+  animate mordecai proud
+  if has_joseph
+    animate joseph smile
+  end
+  jen_approval +5
+
+* [not kmk_tab] I'll marry Tab, get some order into my life!
+  kmk_tab = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  if has_joseph
+    animate joseph smile
+  end
+  tab_approval +5
+
+* [not kmk_mordecai] Marry Morty, nice trophy husband.
+  kmk_mordecai = "marry"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai proud
+  if has_joseph
+    animate joseph smile
+  end
+  mordecai_approval +5
+end
+
+# hide the ones already chosen
+choose
+* [not kmk_jen] ...and unfortunately kill Jen, but only after we have taken out the Front!
+  kmk_jen = "kill"
+  hide_bubbles
+  animate jen normal
+  animate tab normal
+  animate mordecai proud
+  if has_joseph
+    animate joseph smile
+  end
+  jen_approval -5
+
+* [not kmk_tab] ...and unfortunately kill Tab, but only after we have taken out the Front!
+  kmk_tab = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab defensive
+  animate mordecai normal
+  if has_joseph
+    animate joseph smile
+  end
+  tab_approval -5
+
+* [not kmk_mordecai] ...and unfortunately kill Morty, but only after we have taken out the Front!
+  kmk_mordecai = "kill"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab laugh
+  animate mordecai thinking
+  if has_joseph
+    animate joseph smile
+  end
+  mordecai_approval -5
+end
+
+if has_joseph
+  tab: [laugh] Fun. Say Jen, have you told Joseph the story with you and the duck, in college?
+else
+  tab: [laugh] Fun. Say Jen, have you told the boss the story with you and the duck, in college?
+end
+
+jen: [explain_smile] Heh, no. So, it goes like this. Second year of college, in my dorm-
+animate tab normal
+
+wait_for_input

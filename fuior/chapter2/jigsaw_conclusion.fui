@@ -1,0 +1,19 @@
+load_interlude office_floor
+load_characters jen tab mordecai
+
+wait 2
+show_character jen LEFT
+show_character tab RIGHT_CENTER
+show_character mordecai RIGHT
+
+wait 1
+pcall show_picture
+wait 1
+
+choose
+* This is who we are looking for. Find them. Bring them to me.
+end
+
+wait 1
+hide_all_characters
+wait 1

@@ -1,0 +1,170 @@
+load_interlude office_floor
+load_characters jen
+
+wait 2
+show_character jen LEFT normal
+
+wait 1
+
+jen: [normal] So, hey - boss.
+
+jen: [pointing] Wanted to clear the water about some stuff that I don't know whether you're even aware of or not.
+
+jen: [mega_dissapointed] Chief Lucas was looking at the two of us to see who should head up this task force.
+
+jen: [mega_dissapointed] I guess you aceing that Peterson grill made it a done deal, and I can't say I blame the Chief for that call.
+
+if jen_approval >= 70
+  jen: [explain] Bullshit rumors fly really easily, so just wanted to reassure you that I'm fully on board - right behind you.
+
+  jen: [explain_smile] After all, the best leaders are also the best followers.
+
+  choose
+  * If I had any idea, I would have told the Chief to give it to you. This responsibility feels like a lot.
+    jen_approval -10
+    freedom +1
+    equity +1
+
+    jen: [mega_dissapointed] Huh. Well, this is the situation we're in. We should make the best of it.
+
+  * Thank you for the reassurance, Reyes. Step up your game and you'll lead your own unit in no time.
+    jen_approval -10
+    justice +1
+    evolution +1
+
+    jen: [explain_angry] Erm, right.
+
+  * Glad to hear it, Jen. Let's do good work, whoever's managing this.
+    jen_approval +5
+    equity +1
+    lawful +1
+
+    jen: [explain_smile] 10-4, boss. 10-4.
+  end
+
+else
+  jen: [explain] Be one of the good guys. I'm here for the whole ride, heart and soul.
+
+  jen: [normal_angry] But if you're going to be an aggro bully-cop or bully-boss, I'm telling you plain and simple:
+
+  jen: [pointing_angry] I will try my ethical best to replace you.
+
+  choose
+  * Get back in line Reyes. You're here to do police work, not bust my chops and make threats.
+    animate jen mega_dissapointed
+    hide_bubbles
+    wait 1
+
+    jen_approval -5
+    justice +1
+    lawful +1
+
+    jen: [pointing_angry] The best police work I can do includes keeping an eye on you.
+
+    jen: [explain_angry] Too much is at stake for me to look the other way.
+
+  * Well, that's unnecessarily confrontational, now isn't it? I'm really trying my best here.
+    jen_approval +5
+    lawful +1
+    equity +1
+
+    jen: [pointing] Well, better make sure your best is good enough, then.
+
+    jen: [explain] It's nothing personal, but all of this we have to deal with is much bigger than us.
+
+    jen:[explain] Too much is at stake.
+
+  * Well look at Officer Uppity! Channeled agression has carried decades of police work, don't knock it.
+    jen_approval -5
+    justice +2
+
+    jen: [normal_angry] Oh puh-lease. Step into the new century whenever you're ready.
+
+    jen: [explain_angry] Too much is at stake for you to treat this operation as some sort of ego-trip.
+
+  end
+end
+
+if jen_declassified
+  choose
+  * My door's always open.
+    jen_approval +5
+
+    jen: [normal_smile] Good to know, mhm.
+
+    jen: [pointing] I'll be at my desk.
+
+  * I've read your file, Jennifer. On Martha Hughes?
+    jen_approval -5
+
+    jen: [mega_dissapointed] Oh? I wasn't aware you had access to that...
+
+    jen: [explain_angry] What about it?
+
+    choose
+    * Oh, I just wanted you to know that I know.
+      animate jen mega_dissapointed
+      hide_bubbles
+      wait 1
+
+      jen_approval -10
+      evolution +1
+
+      jen: [normal_angry] Yes, your power has been asserted. Great job.
+
+      jen: [pointing_angry] I'll be at my desk.
+
+    * Just wanted to say you did the right thing there.
+      jen_approval +5
+      freedom +1
+      equity +1
+
+      jen: [explain]  I just did an evaluation, as per my expertise.
+
+      jen: [explain_smile] But message received - and valued.
+
+      jen: [explain] I'd appreciate it if the matter stayed as classified as it's supposed to be.
+
+      jen: [pointing] I'll be at my desk.
+
+    * You let a murderer go free. I won't have that on this team. Understood?
+      jen_approval -10
+      authorities +5
+      lawful +2
+      justice +2
+
+      jen: [explain_angry] I just did an evaluation, as per my expertise.
+
+      jen: [explain] But message received.
+
+      jen: [pointing_angry] I'll be at my desk.
+    end
+
+  * Don't let the door hit you on the way out.
+    jen_approval -5
+
+    jen: [mega_dissapointed] So mature.
+
+    jen: [pointing_angry] I'll be at my desk.
+  end
+
+else
+  choose
+  * My door's always open.
+    jen_approval +5
+
+    jen: [normal] Good to know, mhm.
+
+    jen: [pointing] I'll be at my desk.
+
+  * Don't let the door hit you on the way out.
+    jen_approval -5
+
+    jen: [explain_angry] So mature.
+
+    jen: [pointing_angry] I'll be at my desk.
+  end
+end
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,47 @@
+load_interlude office_floor
+load_characters tristan lisa
+
+wait 2
+show_character tristan RIGHT normal
+wait 1
+
+tristan: We've brought in another reporter for you to talk to.
+
+tristan: [explain] Miss Becker handled the technicalities in the last interview.
+
+tristan: [explain] This time, Miss Lisa Nguyen-Holst is looking to write more of a human interest story.
+
+show_character lisa LEFT default
+
+lisa: [interested] I want to learn all about the team that caught the Twin Bombers!
+animate tristan normal
+
+lisa: [phone_interested] Shall we?
+
+unset interview3_skip
+choose
+* Fuck off out of here. Both of you. Get out of my office...
+  press -15
+  authorities -10
+  lawful +1
+  justice +1
+  animate tristan glasses
+  animate lisa turn_away
+  set interview3_skip
+
+* I'm sorry. We're getting too close to the leadership of the Liberation Front for me to be spending time doing interviews.
+  press -5
+  authorities -5
+  lawful +1
+  animate tristan glasses
+  animate lisa turn_away
+  set interview3_skip
+
+* Very well. Let's sit down, Miss Nguyen-Holst.
+  press +5
+  animate tristan thumbs_up
+  animate lisa smile
+
+end
+
+wait 1

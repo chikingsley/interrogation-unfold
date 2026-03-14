@@ -1,0 +1,64 @@
+load_interlude street
+load_characters mordecai
+
+wait 2
+
+show_character mordecai RIGHT
+wait 1
+
+mordecai: [proud] Ah, this good ol' refreshing evening air is nice.
+
+mordecai: [hips] Say, boss, are you sure we did right here by getting Ennis a transfer?
+
+choose
+* He might have usable intel. If he doesn't, it will have been a mistake.
+  hide_bubbles
+  animate mordecai proud
+  wait 1
+
+  mordecai_approval +5
+  lawful +1
+  justice +1
+
+  mordecai: [proud] Fair enough.
+
+  mordecai: [proud] I guess even the smallest nuggets of info from a low-level guy like him could still be valuable.
+
+* Even if he doesn't have usable intel, we at least helped him escape Drasko's bullying.
+  hide_bubbles
+  animate mordecai thinking
+  wait 1
+
+  mordecai_approval -5
+  lawful +1
+  equity +1
+
+  mordecai: [explain] Dunno' why the asshole deserves any saving.
+
+  mordecai: [thinking] I guess even the smallest nuggets of info from a low-level guy like him could still be valuable.
+
+* Oh, I made sure he gets transferred into a much worse prison. It has the lowest survival rate for its security level in the state. But he'll only know that after our little talk.
+  hide_bubbles
+  animate mordecai thinking
+  wait 1
+
+  cruelty +1
+  insanity +1
+  justice +1
+  authorities +5
+
+  mordecai: [thinking] Oh wow. No pity for the guy, but...
+
+  mordecai: [normal] That's pretty brutal stuff.
+end
+
+wait_for_input
+hide_bubbles
+wait 1
+
+mordecai: [hips] Well, time to go talk to him. Let's get in the car.
+
+mordecai: [point] I'll drive.
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,43 @@
+if cf_overtime_count = 2 and not cf_triggered
+  set cf_triggered
+
+  set_preset_music campaign
+
+  load_interlude office_floor
+  load_characters tristan chief
+
+  wait 2
+  show_character chief RIGHT normal
+  show_character tristan LEFT normal
+  wait 1
+
+  chief: [worried] This constant sending of agents to look for civil forfeiture opportunities is looking suspicious, detective.
+
+  tristan: [arms_crossed] It'll look terrible if the public or press catches wind of it, and frames it as an asset grab.
+
+  tristan: [explain] Not to mention some of the assets seized were lifted from friends of the mayor.
+  animate chief normal
+
+  choose
+  * Well, combating terrorists requires resources. Tell the press that.
+    hide_bubbles
+    animate chief bossss
+    animate tristan arms_crossed
+    set cf_press_penalty
+
+  * That's the system, that's the law. I can confiscate those assets. The rest is your problem.
+    hide_bubbles
+    animate chief bossss
+    animate tristan glasses
+    authorities -10
+
+  * Fine, I'll try and be more careful by doing civil forfeitures from poorer neighbourhoods - this way, I won't hit important people.
+    hide_bubbles
+    animate chief smiling
+    animate tristan normal
+    set cf_popularity_penalty
+  end
+
+  wait 2
+  hide_all_characters
+end

@@ -1,0 +1,147 @@
+##triggers right after h1, AND hannigan's3
+
+load_interlude street
+load_characters mordecai
+
+wait 2
+show_character mordecai LEFT normal
+
+wait 1
+
+mordecai: [gun] Hey, boss? Before you head home-
+
+mordecai: [gun] Wanted to talk to you out here, away from the others.
+
+mordecai: [hips] Heard about the Internal Affairs investigation thing you need to deal with tomorrow.
+
+mordecai: [normal] I know this Hall guy, seen him operate before. Rumor is that he's a tough cookie.
+
+mordecai: [explain] And, look, I just want to know...
+
+mordecai: [explain] Is there actually any dirt on you? Cut any corners? Did any nasties?
+
+if mordecai_approval >= 70
+  mordecai: [point] Just give it to me straight.
+
+  choose
+  * I've really been doing my best to be by the book, Morty. It's all clean.
+    lawful +1
+
+    mordecai: [point] Okay. I'm with you then.
+
+* Results come first, stopping these psychos. That's meant cutting some corners - ethically speaking.
+    mordecai_approval -10
+    justice +1
+
+    mordecai: [thinking] Erm, if you say so... yea.
+
+* I've done some bad things, Morty. But they're on me. No need for you to take on any of that load.
+
+    mordecai: [explain] I appreciate what you're tryin' to do here, to protect us.
+
+    mordecai: [normal] But you don't have to. We're here for ya'.
+  end
+
+else
+  mordecai: [gun] Hall being here means there's smoke. How big's the fire?
+
+  choose
+  * I've really been doing my best to be by the book, Morty. It's all clean.
+    mordecai_approval -10
+    lawful +1
+
+    mordecai: [thinking] If you say so.
+
+  * Results come first, stopping these psychos. That's meant cutting some corners - ethically speaking.
+    justice +1
+
+    mordecai: [normal] I appreciate you bein' on the level with me on this, at least.
+
+  * I've done some bad things, Morty. But they're on me. No need for you to take on any of that load.
+    mordecai_approval -5
+    justice +1
+
+    mordecai: [hips] Look, I know whatever you've done. It was for the cause.
+
+    mordecai: [hips] Right or wrong, you tried your best.
+  end
+end
+
+if mordecai_declassified
+  choose
+  * Thanks for checking in, Morty. I have this.
+
+    mordecai: [normal] G'luck with Hall, boss. G'night.
+
+* I know from your declassified file about how you had some dirt on yourself too, from the distant past...
+    animate mordecai thinking
+    hide_bubbles
+    wait 1
+
+    mordecai: [hips] Huh. The armed robbery thing.
+
+    choose
+    * ... and I never needed to confront you about it.
+      mordecai_approval +5
+
+      mordecai: [thinking] Huh. Point taken. I'll fuck off about the IA stuff.
+
+  *  ... and how you snitched on your mates to get a clean record.
+      freedom +1
+      equity +1
+
+      mordecai: [thinking]  Yea, well...
+      hide_bubbles
+      wait 1
+
+      mordecai: [explain] That was bullshit of me to do, but there's not much I can do about it now.
+
+  * ... and how you still became a great cop after all of that.
+      animate mordecai explain
+      hide_bubbles
+      wait 1
+      mordecai_approval -10
+
+      mordecai: [thinking] Heh, thanks, but...
+
+      mordecai: [hips] Hell, I proved zero loyalty to those guys.
+
+      mordecai: [hips] Those guys, who were just as guilty as I was.
+
+      mordecai: [gun] One of them ended up super bad. A total meth-head.
+
+      mordecai: [thinking] So, nah, being a good cop or not today, what I did was just betrayal.
+    end
+
+    mordecai: Anyway, good luck with Hall. G'night.
+
+  * This Hall business is mine to deal with. Don't worry about it. Focus on your own work.
+    animate mordecai thinking
+    hide_bubbles
+    wait 1
+    mordecai_approval -10
+    justice +1
+
+
+    mordecai: [hips] Right. G'night.
+  end
+
+else
+  choose
+  * Thanks for checking in, Morty. I have this.
+
+    mordecai: [normal] G'luck with Hall, boss. G'night.
+
+  * This Hall business is mine to deal with. Don't worry about it. Focus on your own work.
+    animate mordecai thinking
+    hide_bubbles
+    wait 1
+    mordecai_approval -10
+    justice +1
+
+    mordecai: [hips] Right. G'night.
+  end
+end
+
+wait_for_input
+hide_all_characters

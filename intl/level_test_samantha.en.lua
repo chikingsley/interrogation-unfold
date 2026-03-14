@@ -1,0 +1,20 @@
+-- luacheck: no max line length
+return {
+  ["level_test_samantha.1"] = "They breathe heavily, startled and displeased.",
+  ["level_test_samantha.2"] = "They groan in pain, giving you a scared look.",
+  ["level_test_samantha.3"] = "They gasp for air, calling for help.",
+  ["level_test_samantha.4"] = "They yell out in pain, insisting that they are innocent.",
+  ["level_test_samantha.5"] = "Let's talk about something else.",
+  ["level_test_samantha.6"] = "Smile",
+  ["level_test_samantha.7"] = "Nod",
+  ["level_test_samantha.8"] = "Headshake",
+  ["level_test_samantha.9"] = "Shrug",
+  ["level_test_samantha.10"] = "Remorse",
+  ["level_test_samantha.11"] = "Disgust",
+  ["level_test_samantha.12"] = "Scared",
+  ["level_test_samantha.13"] = "Terrified",
+  ["level_test_samantha.14"] = "I have no idea what you're talking about.",
+  ["level_test_samantha.15"] = "They look into your eyes, perhaps a bit worried.",
+  ["level_test_samantha.16"] = "Ok.",
+  ["level_test_samantha.17"] = "They nod.",
+}

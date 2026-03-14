@@ -1,0 +1,45 @@
+load_interlude office_floor
+load_characters tristan patricia
+
+wait 2
+show_character tristan LEFT normal
+wait 1
+
+tristan: Mayor Patel has kindly asked that you speak to another reporter, and Chief Anderson has signed off on it too.
+
+tristan: [explain] This is Patricia Becker, perhaps the city's most respected journalist.
+show_character patricia RIGHT normal
+
+patricia: [normal] Good day, officer.
+animate tristan normal
+
+patricia: [smile] Tristan, you're too kind.
+animate tristan normal
+
+patricia: [asking_neutral] And I just want to assure you, officer, that this interview will be fair and open.
+animate tristan normal
+
+wait_for_input
+
+unset interview2_skip
+choose
+* No, fuck this. I'm not talking to the press. My department's actions speak for themselves.
+  press -15
+  authorities -5
+  animate tristan glasses
+  animate patricia disapproving
+  set interview2_skip
+
+* Ughh, fine. Let's get this over with. Don't take too long - I have actual work to do.
+  press -5
+  justice +1
+  animate tristan glasses
+  animate patricia disapproving
+
+* I'd be happy to, Miss Becker. This way.
+  press +5
+  animate tristan normal
+  animate patricia asking_neutral
+end
+
+wait 1

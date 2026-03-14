@@ -1,0 +1,75 @@
+load_interlude office_floor
+if has_joseph
+  load_characters jen tab mordecai joseph
+else
+  load_characters jen tab mordecai
+end
+
+wait 2
+show_character jen LEFT_CENTER mega_dissapointed
+show_character tab LEFT defensive
+show_character mordecai RIGHT thinking
+if has_joseph
+  show_character joseph RIGHT_CENTER neutral
+end
+
+wait 1
+
+jen: [mega_dissapointed] We, uh...
+
+wait_for_input
+
+if has_joseph
+  joseph: [sad] We found Brown deceased in her appartment.
+else
+  tab: [defensive] We found Miss Brown deceased in her appartment.
+end
+
+if insanity >= 5
+  choose
+  * <insanity>You live by Front's sword, you die by the Front's sword.</insanity>
+    jen_approval -5
+    justice +1
+    animate jen mega_dissapointed
+    wait 2
+
+  * <insanity>Don't even report it. Let that terrorist rot in her apartment.</insanity>
+    if has_joseph
+      joseph_approval -5
+    end
+    tab_approval -5
+    jen_approval -5
+    mordecai_approval -5
+    justice +1
+
+    animate jen mega_dissapointed
+    animate mordecai thinking
+    animate tab disgsut
+    if has_joseph
+      animate joseph concern
+    end
+    wait 2
+  end
+end
+
+tab: [aback] Apparent suicide. Though we can't exclude that the Liberation Front is tying up vulnerable loose ends.
+
+mordecai: [thinking] Plenty of LF material around her apartment, but just the usual propaganda, no names.
+
+if has_joseph
+  joseph: [explaining] This woman was our route to the leadership. The best one yet.
+  wait_for_input
+  animate joseph sad
+else
+  mordecai: [hips] This chick supposedly handled the leadership's travels. It sucks that we now have nothing.
+end
+
+jen: [mega_dissapointed] Excuse me.
+
+wait_for_input
+hide_character jen
+
+mordecai: [point] Got these out of a paper shredder. Maybe you can make something out of it.
+
+wait_for_input
+hide_all_characters

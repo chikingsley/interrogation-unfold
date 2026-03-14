@@ -1,0 +1,64 @@
+load_interlude office_floor
+load_characters jen tab
+
+wait 2
+show_character tab RIGHT normal
+show_character jen LEFT normal
+wait 1
+
+jen: [explain] We've got some live action, boss.
+
+jen: Morty's out there with some badges grabbing our three suspects for who that "Hornbunny" might be.
+
+tab: [asking] I do hope Mr. Fischer practices restraint. I know him to be rather abrasive when bringing in people.
+animate jen normal
+
+choose
+* I'm sure Morty means well.
+  jen_approval +5
+  tab_approval -5
+  mordecai_approval +5
+  animate jen normal_smile
+
+* Well, the terrorist among them deserves to be... abrased.
+  tab_approval -5
+  justice +1
+  animate tab disgust
+
+* Procedure's important. Innocent until proven guilty.
+  jen_approval -5
+  tab_approval -5
+  lawful +1
+  animate tab listening
+  authorities +5
+end
+
+hide_bubbles
+wait 1
+
+jen: [pointing] I'm going to get the rooms ready.
+animate tab normal
+
+wait_for_input
+hide_character jen
+wait 1
+
+tab: There's an update being pushed to the chat room's software...
+
+tab: [aback] Darn. It seems that the Liberation Front have found out about our move. They've triggered the reallocation of passwords for the chat room.
+
+tab: [aback] It's just a matter of minutes before the current password becomes useless. We need to acquire a new one asap.
+
+wait_for_input
+hide_bubbles
+show_character jen LEFT normal
+wait 1
+
+jen: They're here. Get ready to interrogate'm.
+animate jen pointing false true # Flipped animation
+
+tab: [normal] We'll line up the files.
+
+wait_for_input
+hide_all_characters
+commit_stats

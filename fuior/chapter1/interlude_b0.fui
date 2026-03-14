@@ -1,0 +1,14 @@
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: Good work in there. I have something important I need to discuss with you.
+
+dummy: But before that, I need you to finish up the press release we're putting out about this case. Help them word it.
+
+dummy: Then come see me.
+
+wait_for_input
+hide_all_characters

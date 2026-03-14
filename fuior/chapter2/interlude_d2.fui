@@ -1,0 +1,25 @@
+load_interlude office_floor
+load_characters jen tab mordecai
+
+wait 2
+show_character jen LEFT
+show_character tab RIGHT_CENTER
+show_character mordecai RIGHT
+wait 1
+
+jen: [pointing] We're back from looking into one of the explosions.
+
+jen: [explain_angry] Office building. Triggered after hours. Still, eight dead and twenty in the hospital. No relevant witnesses off the bat.
+
+mordecai: [hips] We've spoken to the explosive forensics, and it's like this:
+animate jen normal
+
+mordecai: [explain] The big boom took place on the 13th floor. A large quantity of explosive material would have been required.
+
+tab: [defensive] That floor was closed, unpopulated. It was set to be refurbished in the coming months.
+animate mordecai normal
+
+tab: [defensive] We're going to head out again, canvas for witnesses. See if we can find any surveillance.
+
+wait_for_input
+hide_all_characters

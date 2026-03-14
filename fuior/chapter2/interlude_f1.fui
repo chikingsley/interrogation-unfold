@@ -1,0 +1,29 @@
+load_interlude office_floor
+if has_joseph
+  load_characters jen tab joseph
+else
+  load_characters jen tab
+end
+
+wait 2
+show_character jen LEFT normal
+if has_joseph
+  show_character tab RIGHT_CENTER normal
+  show_character joseph RIGHT neutral
+else
+  show_character tab RIGHT normal
+end
+wait 1
+
+jen: [normal_smile] Things are finally looking up.
+
+if has_joseph
+  joseph: [neutral] Between Ennis, Wilson's testimony, Adams, the details from Novak, and now Higgs and Romano, we've gathered lots of insights and are finally getting the critical mass to tie more of the leads together.
+else
+  jen: [explain_smile] Between Ennis, Wilson's testimony, Adams, the details from Novak, and now Higgs and Romano, we've gathered lots of insights and are finally getting the critical mass to tie more of the leads together.
+end
+
+tab: [normal] We're going to get cracking on proving the cases as many of these suspects are beginning to look like clear-cut Liberation Front members.
+
+wait_for_input
+hide_all_characters

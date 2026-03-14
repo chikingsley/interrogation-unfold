@@ -1,0 +1,95 @@
+load_interlude office_floor
+load_characters honest_abe tristan chief
+
+wait 2
+show_character honest_abe LEFT phone
+show_character chief RIGHT thinking
+show_character tristan RIGHT_CENTER arms_crossed
+wait 1
+
+honest_abe: [disgust] Well, well, Detective. You've had quite the field day with my clients in my absence, haven't you?
+
+choose
+* Only what they chose to tell me, councillor.
+  hide_bubbles
+  animate honest_abe wtf
+  lawful +1
+
+* Well, with them being sooo innocent, I'm sure it hasn't been a problem.
+  hide_bubbles
+  animate honest_abe wtf
+  justice +1
+
+* How exactly do you sleep at night? Representing terrorists?
+  hide_bubbles
+  animate honest_abe wtf
+  animate chief bossss
+  animate tristan glasses
+  justice +2
+end
+wait 1
+
+tristan: [explain] Detective...
+
+honest_abe: [calm_down] Well, that's quite, as the Brits say, 'cheeky' - now isn't it?
+animate tristan arms_crossed
+animate chief thinking
+
+honest_abe: [explain2] Alas, despite their dismal treatment, I've been talking to Mr. Miller and Chief Anderson here.
+
+honest_abe: [explain2] And because all three of my clients are of completely good intent, the good gentlemen and I have reached an agreement.
+
+honest_abe: [arms_crossed] We will not press charges against the abusive police practices thus far.
+
+honest_abe: [arms_crossed] And they will even willingly discuss with you, Detective.
+
+honest_abe: [paper] Recorder stays on throughout, or else they leave.
+
+honest_abe: [paper] However, all of this under the condition that nothing of what one says can used in their own incrimination. Yes?
+
+tristan: [glasses] Mhm.
+
+chief: [worried] We've signed documents to that effect, yes.
+animate tristan arms_crossed
+
+honest_abe: [hand] Wonderful! Then let's get this over with.
+
+honest_abe: [hand] Don't take long. They're important people. They have places to be.
+
+hide_character honest_abe
+
+choose
+* I can't believe you fools signed something like that.
+  hide_bubbles
+  animate chief fuck_it
+  animate tristan arms_crossed
+  lawful +1
+  wait 2
+
+* I see what you did there, Chief. I can work with this.
+  hide_bubbles
+  animate chief smiling
+  animate tristan thumbs_up
+  wait 2
+
+* Are you fucking Liberation front?! Why would you sign something like that?
+  justice +1
+
+  chief: [get_out] I should kick you out, you arrogant shit!
+  animate tristan arms_crossed
+end
+
+chief: [normal] We had to sign, given the context, but it's an opportunity.
+animate tristan arms_crossed
+
+tristan: [explain] Indeed. The wording allows for a window. They can't self-incriminate...
+
+chief: [bossss] ... but nothing prevents them from incriminating one another.
+animate tristan arms_crossed
+
+chief: [fuck_it] You need to turn them against each other. Go get'm.
+
+chief: [fuck_it] This is for all the marbles. Take down the Liberation Front!
+
+wait_for_input
+hide_all_characters

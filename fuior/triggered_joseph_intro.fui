@@ -1,0 +1,26 @@
+### To run before the Joseph sit down
+
+set_preset_music campaign
+
+load_interlude office_floor
+load_characters mordecai joseph
+
+wait 2
+show_character mordecai LEFT normal
+wait 1
+
+mordecai: Chief, someone's here to see you.
+
+wait_for_input
+hide_bubbles
+wait 1
+show_character joseph RIGHT neutral
+
+mordecai: [gun] This is Joseph Ward. More than two decades ago, he led a team sorta' like ours against the Burgundy Riots.
+
+joseph: [concern] Greetings.
+
+mordecai: [point] Meeting room's ready for you.
+
+wait_for_input
+hide_all_characters

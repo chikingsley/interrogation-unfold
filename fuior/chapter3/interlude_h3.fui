@@ -1,0 +1,66 @@
+load_interlude office_floor
+if has_joseph
+  load_characters jen tab mordecai chief joseph
+else
+  load_characters jen tab mordecai chief
+end
+
+wait 2
+show_character jen LEFT_CENTER
+show_character mordecai RIGHT
+if has_joseph
+  show_character joseph CENTER_RIGHT
+  show_character tab RIGHT_CENTER
+else
+  show_character tab RIGHT_CENTER
+end
+show_character chief LEFT
+wait 1
+
+jen: [pointing_angry] How was it?!
+
+choose
+* Hall is a hard guy, but I respect his drive. We seem to be in the clear.
+  hide_bubbles
+  animate jen normal_angry
+  animate tab indignant
+  animate mordecai normal
+  animate chief normal
+  if has_joseph
+    animate joseph dismissive
+    joseph_approval +5
+
+  end
+  mordecai_approval +5
+  justice +1
+
+* Hall is a damned psychopath. I can't believe how he acted in there. We seem to be cleared though - for now.
+  hide_bubbles
+  animate jen mega_dissapointed
+  animate tab aback
+  animate mordecai hips
+  if has_joseph
+    animate joseph sad
+  end
+  animate chief thinking
+  tab_approval +5
+  jen_approval +5
+  lawful +1
+
+* Don't know what the hell that was in there, but it doesn't matter. We need to get back to work.
+  hide_bubbles
+  animate jen normal_angry
+  animate tab defensive
+  animate mordecai hips
+  animate chief smiling
+  if has_joseph
+    animate joseph concern
+  end
+  authorities +5
+end
+
+chief: [fuck_it] Back to it, everyone.
+
+wait_for_input
+hide_all_characters
+commit_stats interlude

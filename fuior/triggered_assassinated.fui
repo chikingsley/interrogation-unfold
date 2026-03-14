@@ -1,0 +1,40 @@
+set_preset_music campaign
+
+load_interlude street
+load_characters jen mordecai
+
+wait 2
+show_character jen RIGHT normal
+show_character mordecai LEFT normal
+wait 1
+
+mordecai: [normal] Well, I'm headed home.
+
+mordecai: [hips] Jen, should I drop you off someplace?
+
+jen: [explain] Nah, I'll wait for Tab to come out. Maybe sneak a cig'.
+
+mordecai: [gun] Okay, well, 'night boss, Jen'.
+
+choose
+* 'Night, Morty.
+* Good night, Fischer.
+* See you first thing tomorrow. Rest well.
+end
+
+jen: [normal_smile] G'night Mort.
+
+wait_for_input
+hide_bubbles
+hide_character mordecai
+wait 2
+
+jen: [mega_dissapointed] You want a cigarette too, b-
+
+jen: [normal_angry] Huh.
+
+jen: [pointing_angry] Erm, I think that person behind you migh-
+
+set_preset_music # Turn off music for forshadowing
+wait_for_input
+pcall die

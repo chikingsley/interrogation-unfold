@@ -1,0 +1,37 @@
+load_interlude office_floor
+load_characters jen tab
+
+show_character jen LEFT normal
+show_character tab RIGHT normal
+wait 1
+
+apples = 12
+
+# Substitutions inside copy. Any expression can go inside a substitution between {}
+jen: Hi, Tab! I have {apples} apples with me! You can have {apples / 2} of them.
+tab: Thanks!
+
+# Expressions also work when incrementing/decrementing/setting stats
+apples - (apples / 2)
+
+# Expressions work as command arguments as well. Just surround them with {}
+wait {apples / 5}
+
+# Boolean expressions work inside if conditions as well
+if (something and apples >= 13) or not a_third_thing
+    tab: Something is happening
+end
+
+# If conditions can have any number of elseif clauses
+if something
+    tab: Something is true
+elseif something_else
+    tab: Something else is true
+elseif anything_else
+    tab: Anything else is true
+else
+    tab: Neither "something" nor "something else" nor "anything else" are true
+end
+
+wait_for_input
+hide_all_characters

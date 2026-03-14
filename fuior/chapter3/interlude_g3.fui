@@ -1,0 +1,16 @@
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: Good job in there.
+
+dummy: Before you get to the press release for this one, though...
+
+dummy: The factory's covered by national security confidentiality rules.
+
+dummy: Word the press release in such a way that keeps obscured how dangerous things actually got...
+
+wait_for_input
+hide_all_characters

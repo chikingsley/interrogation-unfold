@@ -1,0 +1,26 @@
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: This Liberation Front business you got out of Peterson, it seems to be pretty serious stuff.
+
+dummy: They've been claiming more and more hits, and seem to be behind things like assaults on politicians.
+
+dummy: They appear to be expanding their operation, chiefly in our city.
+
+dummy: So, I've talked it over with the powers that be, and we've decided you're the best person for the job.
+
+dummy: You'll be heading up a small unit to combat these guys.
+
+dummy: We are pulling some of the best people from other departments to work with you.
+
+dummy: Not gonna' lie - this unit'll mean all eyes will be on you. Try and keep everyone happy.
+
+dummy: But most importantly: stop these bastards.
+
+dummy: Rest up. See you tomorrow.
+
+wait_for_input
+hide_all_characters

@@ -1,0 +1,78 @@
+-- luacheck: no max line length
+return {
+
+  ["wall.communication"] = "The online presence of the Liberation Front points towards a substantial number of sympathizers. Internet chat rooms are the only communication method identified up until now, but many more might be in use.",
+  ["wall.recruitment1"] = "The Liberation Front's actions require extensive funds and recruitment capabilities, whose origin has yet to be determined.",
+  ["wall.recruitment2"] = "The Liberation Front's extensive recruitment and funding capabilities derive from a clever instrumentalization of the resources of its members.",
+  ["wall.ideology1"] = "The Liberation Front believes the world's current power structures are oppressive and need to be taken down by force.",
+  ["wall.ideology2"] = "Individuals ascribing to a number of different ideologies are part of the Liberation Front. They all display the common belief that the current world order is opressive and must be violently changed.",
+  ["wall.ideology3"] = "Three different ideological wings of the Liberation Front have been identified. They all have in common the belief that the current world order is oppressive and must be violently changed.",
+  ["wall.central_picture1"] = "The Liberation Front is a young movement/organization whose anti-authority rhetoric is gaining increasingly more traction. It is centered on the city but spreading through the whole country.",
+  ["wall.central_picture2"] = "The Liberation Front is a medium-sized terrorist organization and social movement. The terrorist attacks it coordinated already have already claimed 80 victims.",
+  ["wall.central_picture3"] = "The Liberation Front is gaining more and more traction, slowly becoming a terrorist organization with global reach. ",
+  ["wall.terrorist_attacks"] = "The Liberation Front conducted three terrorist attacks within the city. Two of them were successful.",
+  ["wall.leaders"] = "The speed at which the Liberation Front is growing could have only been achieved by a highly competent leadership structure.",
+
+  ["wall.chats"] = "The Liberation Front is known to communicate using internet chat rooms.",
+  ["wall.government_bomb"] = "A bomb placed by the Liberation Front blew up the building housing the city's municipal government.",
+  ["wall.office_bomb"] = "A bomb placed by the Liberation Front collapsed the Downtown Spring Offices building.",
+  ["wall.lady_luck"] = "The pseudonym under which a high-ranking Liberation Front member released a public statement.",
+  ["wall.anti_corporations"] = "LF has a wing that believes that the current private property-based world order is one that oppresses and encourages the unbridled accumulation of power.",
+  ["wall.anti_state"] = "LF has a wing that believes that a world which centralizes power in the hands of politicians who cannot be held accountable is one that encourages oppression and limits freedom.",
+  ["wall.self_autonomy"] = "LF has a wing that believes that the modern world strips humans of their core abilities, and as such creates and unjust, oppressive world.",
+  ["wall.colonel_james"] = "Colonel James Bennet is currently in custody on the suspicion of being one of the leaders of the Liberation Front.",
+
+  ["wall.casefile_ep1"] = "Ms. Peterson was found dead in her house with her husband tied up next to her. At first, Darryl Peterson accused Jerry Cox, a burglar who had broken into their house earlier that night, of murdering his wife. Peterson later confessed under questioning to committing the murder himself, as well as collaborating with the Liberation Front.",
+  ["wall.newspaper_ep1"] = "Article by Lisa Nguyen-Holst on the emergence of the Liberation Front.",
+  ["wall.casefile_peterson"] = "Darryl Peterson has confessed to murdering his wife, and to communicating with the Liberation Front.",
+  ["wall.casefile_jerry"] = "Jerry \"Munch\" Cox broke into the house of Mr. and Ms. Peterson and stole a number of house plants on the night that Darryl Peterson murdered his wife.",
+
+  ["wall.casefile_ep2"] = "The Liberation Front has used the private channel of a pet care chat room to plot online. Three IPs could have belonged to the HornBunny49, a user who had access to this private channel. The IPs' owners have been questioned and one of them, Fred Ennis, has revealed his collaboration with the LF, as well as the password to the private channel.",
+  ["wall.newspaper_ep2"] = "An interview with a former Liberation Front member.",
+  ["wall.casefile_diana"] = "Diana O'Donell was not found guilty of collaborating with the LF on the Pet Care chat room used by the organization.",
+  ["wall.casefile_fred"] = "Fred Ennis is a confessed LF collaborator who has revealed the password to a private channel used by the organization on a pet care chat room.",
+  ["wall.casefile_michael"] = "Michael Lemmon was not found guilty of collaborating with the LF on the pet care chat room used by the organization.",
+
+  ["wall.casefile_ep3"] = "The conversations within the private channel of the pet care chat room revealed that the LF was planning a bombing at the Southbank Mall. Three individuals were brought for questioning after being found within the part of the mall in which the bomb was placed. Daniel Wilson confessed to planting the bomb and described its exact location in time for its defusal.",
+  ["wall.newspaper_ep3"] = "Eddy Walker describes the extent of damage caused by the Liberation Front's first two attacks.",
+  ["wall.casefile_daniel"] = "Daniel Wilson has revealed under questioning the location of the bomb he placed in the mall in which he worked as a security guard. He placed the bomb after the LF promised to financially aid his sick mother.",
+  ["wall.casefile_bakil"] = "Bakil Medana is an illegal immigrant who was apprehended by Daniel Wilson, a mall security guard. When searched, he was found carrying a firearm without a permit. After questioning, he has not been found guilty of collaborating with the Liberation Front. ",
+  ["wall.casefile_samantha"] = "Samantha Lowe was not found guilty of collaborating with the Liberation Front.",
+
+  ["wall.casefile_ep4"] = "A picture taken by an elevator security camera identified 3 suspects who could have placed the bomb at the Downtown Spring Offices building. After questioning, Gabriel Adams confessed to placing the bomb with the aid of Alex Novak, whose mental illness was treated by Adam's Humanitas charity.",
+  ["wall.newspaper_ep4"] = "Patricia Becker describes the Liberation Front's growing reach.",
+  ["wall.casefile_adams"] = "Gabriel Adams confessed to being a LF collaborator and to the planting of the bomb at the Downtown Spring Offices building.",
+  ["wall.casefile_maya"] = "Maya Clark was not found guilty of collaborating with the Liberation Front.",
+  ["wall.casefile_alex"] = "Alex Novak was an accomplice of Gabriel Adams who planted a bomb at Downtown Spring Offices.",
+
+  ["wall.casefile_ep5"] = "Forensic evidence pointed towards Cassandra Higgs and Lucas Romano as the prime suspects in the municipal government building bombing case. After fleeing the units sent to arrest them, the two kidnapped Silvia Loken and Benjamin Pillay within the veterinarian's office in which the two worked. After negotiations, the two released their hostages and turned themselves in.",
+  ["wall.newspaper_ep5"] = "Dacian Maiorescu describes the political dillemma that the city's mayor has to face due to the Liberation Front's attacks.",
+  ["wall.casefile_cassandra"] = "Cassandra Higgs kidnapped Silvia Loken and Benjamin Pillay together with Lucas Romano after fleeing from the police.",
+  ["wall.casefile_amatis"] = "Amatis Garcia was the boyfriend of Cassandra Higgs at the moment of the Veterinary Kidnapping.",
+  ["wall.casefile_lucas"] = "Lucas Romano kidnapped Silvia Loken and Benjamin Pillay together with Cassandra Higgs after fleeing from the police.",
+  ["wall.casefile_silvia"] = "Silvia Loken has been released unharmed after being kidnapped by Cassandra Higgs and Lucas Romano.",
+
+  ["wall.casefile_ep6"] = "The Liberation Front members that placed the three bombs each received their orders from different LF operatives. After apprehending and questioning them, Lynda Bailey revealed information about an impending attack on a weapons manufacturing facility.",
+  ["wall.newspaper_ep6.1"] = "Upshur Bernstein describes his take on what happened during the King Weaponry manufacturing facility bombing.",
+  ["wall.newspaper_ep6.2"] = "Lisa Nguyen-Holst apologizes for not realizing the violent nature of the Liberation Front in her former blog post.",
+  ["wall.casefile_lynda"] = "Lynda Bailey is a determined LF collaborator. Under questioning, she agreed to reveal the location of a planned Liberation Front attack.",
+  ["wall.casefile_anton"] = "Anton Drasko has been convicted for being an accomplice of Gabriel Adams in the Downtown Spring Offices bombing.",
+  ["wall.casefile_helene"] = "Helene Kufos has been found guilty of collaborating with the Liberation Front. She was the one to recruit Cassandra Higgs to the organization.",
+
+  ["wall.casefile_ep7"] = "The King Weaponry manufacturing facility has been evacuated after an anonymous phone call announced a bomb attack. Afterward, the factory's security system sealed off the facility. After questioning, among the three individuals who had access to the factory's security system, the facility's owner Aaron King confessed to collaborating with LF in planting the bomb.",
+  ["wall.newspaper_ep7"] = "Eddy Walker states his anger towards the Liberation Front and its sympathizers.",
+  ["wall.casefile_tab"] = "Tab Thompson has not been found guilty of collaborating with the LF.",
+  ["wall.casefile_steve"] = "Steve Muradian has not been found guilty of collaborating with the LF.",
+  ["wall.casefile_aaron"] = "Aaron King confessed during questioning to staging a bombing attack on his own factory and allowed its defusal.",
+
+  ["wall.newspaper_ep8.theft"] = "Anaba Lee, NorthWest Tenured Professor criticizes the modern individualist world.",
+  ["wall.newspaper_ep8.mountain_man"] = "Upshur speculates about the lone man living with his family in the mountains.",
+  ["wall.newspaper_ep8.money"] = "Damascus Reed, a billionaire, calls a state society unjust and inefficient.",
+  ["wall.newspaper_ep8.power"] = "Dacian Maiorescu's in-depth analysis of the Liberation Front.",
+
+  ["wall.casefile_ep9"] = "Four suspected LF collaborators were on a plane for Phnom Phen. Agent Fisher brought two of them in for questioning which grounded the plane. After questioning, Anaba Lee and Damascus Reed were kept in custody under suspicion of being part of the Liberation Front leadership.",
+  ["wall.casefile_anaba"] = "Anaba Lee is currently in custody on the suspicion of being one of the leaders of the Liberation Front.",
+  ["wall.casefile_valerie"] = "Valerie Arnette was found not guilty of collaborating with the LF.",
+  ["wall.casefile_dennis"] = "Dennis Schmidt was found not guilty of collaborating with the LF.",
+  ["wall.casefile_reed"] = "Damascus Reed is currently in custody on the suspicion of being one of the leaders of the Liberation Front.",
+}

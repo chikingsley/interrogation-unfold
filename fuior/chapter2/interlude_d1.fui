@@ -1,0 +1,175 @@
+load_interlude office_floor
+load_characters jen tab mordecai tristan chief
+
+wait 2
+show_character jen LEFT_CENTER mega_dissapointed
+show_character tab RIGHT_CENTER aback
+show_character mordecai RIGHT hips
+wait 1
+
+mordecai: [thinking] Jeez'. Sorry boss.
+
+jen: [explain_angry] Why are you apologizing? It's not like it's your fault, or ours.
+
+if insanity >= 4
+  choose
+  * <insanity>Those Liberation Front cunts deserve to get fucking eviscerated. Slowly.</insanity>
+    tab_approval -5
+    jen_approval -5
+    justice +2
+    animate jen mega_dissapointed
+    animate tab defensive
+
+
+  * <insanity>The dead are dead, are dead deaders dead.</insanity>
+    jen_approval -5
+    mordecai_approval -5
+    evolution +1
+    animate jen mega_dissapointed
+    animate mordecai thinking
+  end
+
+  hide_bubbles
+  wait 2
+end
+
+mordecai: [thinking] I know, I know. It's just...
+
+mordecai: [explain] ... I feel like we're somehow responsible.
+
+tab: [indignant] Well, we are the department charged with stopping the people who did these very acts.
+
+tab: [indignant] So, we certainly have some responsibility - if not all of it.
+animate mordecai hips
+
+choose
+* We're trying to stop murderers. That doesn't make us in any way responsible for the murders.
+  hide_bubbles
+  animate jen normal
+  animate tab disgust
+  animate mordecai normal
+  jen_approval +5
+  tab_approval -5
+  mordecai_approval -0
+  freedom +1
+
+* We're responsible for not doing our jobs well enough. Let's do better from here on out.
+  hide_bubbles
+  animate jen normal
+  animate tab normal
+  animate mordecai normal
+  jen_approval +0
+  tab_approval -0
+  mordecai_approval +5
+  evolution +1
+  lawful +1
+
+* That blood is on our hands. Now, let's do our very best to keep off any more.
+  hide_bubbles
+  animate jen explain_angry
+  animate tab listening
+  animate mordecai normal
+  jen_approval -5
+  tab_approval +5
+  mordecai_approval -0
+  justice +1
+  equity +1
+end
+
+wait 2
+show_character chief LEFT worried
+wait 1
+
+chief: [thinking] Good evening everyone.
+
+chief: [thinking] We need the room please.
+
+wait_for_input
+hide_character jen
+hide_character tab
+hide_character mordecai
+wait 1
+
+chief: [asking] I have someone here from city hall to talk to you.
+wait_for_input
+hide_bubbles
+
+
+show_character tristan RIGHT normal
+wait 1
+
+tristan: [normal] Greetings, detective. My name is Tristan Miller. I asssist mayor Patel.
+
+tristan: [explain] I've been discussing things with Chief Anderson for a few hours now, but I wanted to directly address you too.
+animate chief thinking
+
+tristan: [arms_crossed] These deaths, obviously... they don't look good for any of us.
+
+tristan: We're relying on your task force to end what is surely the greatest threat to this city: this Liberation Front.
+
+tristan: [glasses] Can we count on your team to achieve this - to make the city safe again?
+animate chief normal
+
+choose
+* You can. The Liberation Front will be shut down.
+  hide_bubbles
+  animate chief thinking
+  authorities +5
+  lawful +1
+
+* We'll do our best, but we just don't know how deep their network runs. Can't offer any sincere guarantees.
+  hide_bubbles
+  animate tristan arms_crossed
+  animate chief normal
+  authorities +0
+  tab_approval +5
+
+* We may need more resources to have any chance of dealing with them.
+  set d1_money
+  hide_bubbles
+  animate tristan arms_crossed
+  animate chief fuck_it
+  authorities -5
+  budget +1000
+end
+
+wait 2
+
+if d1_money
+  tristan: [thumbs_up] Very well. We'll supplement your next budget with some additional funds.
+  animate chief normal
+end
+
+tristan: [arms_crossed] Find the bastards doing this. As soon as possible.
+animate chief normal
+
+choose
+* Consider it done. I'll get my team right on it.
+  hide_bubbles
+  animate tristan thumbs_up
+  animate chief thinking
+  authorities +5
+  jen_approval -5
+  tab_approval -5
+  lawful +1
+* We'll do our very best. I just hope it's enough.
+  hide_bubbles
+  animate tristan normal
+  animate chief normal
+  authorities +0
+  tab_approval +5
+  evolution +1
+  equity +1
+  freedom +1
+
+* The sooner you get out, the sooner we can get to work.
+  hide_bubbles
+  animate tristan arms crossed.
+  animate chief cplm
+  authorities -5
+  justice +1
+end
+
+wait 2
+hide_all_characters
+commit_stats interlude

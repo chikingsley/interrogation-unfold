@@ -1,0 +1,66 @@
+load_interlude office_floor
+load_characters chief jen tab
+
+wait 2
+show_character chief LEFT normal
+wait 1
+
+chief: Congratulations on your new assignment, Detective.
+
+chief: [bossss] Let me introduce some of the people you'll be working with.
+
+chief: [normal] This is Tab Thompson, analyst extraordinaire.
+show_character tab RIGHT_CENTER normal
+
+tab: [asking] I look forward to addressing the threat of the Liberation Front with you, Detective.
+
+chief: [normal] And this is Jennifer Reyes, Organized Crime department's best.
+animate tab normal
+show_character jen RIGHT normal
+
+jen: [normal_smile] Delighted, Detective
+
+chief: Mordecai Fischer, who we pulled from Homicide, will also be helping you out in the field.
+animate jen normal
+
+chief: I'll leave you to it.
+
+wait_for_input
+hide_character chief
+
+wait 1
+jen: [explain_smile] Shall we head out and talk some shop over at Hanningan's?
+
+tab: [defensive] The meeting room is not being used...
+
+choose
+* Hannigan's sounds great.
+  hide_bubbles
+  jen_approval +10
+  tab_approval -10
+  animate jen normal_smile
+  animate tab disgust
+
+* Let's take the meeting room.
+  hide_bubbles
+  jen_approval -5
+  tab_approval +5
+  lawful +1
+  animate jen normal_angry
+  animate tab listening
+
+* Let's just go straight to our desks. Chief already assigned us tasks to cover.
+  hide_bubbles
+  jen_approval -5
+  tab_approval -5
+  justice +1
+  animate jen normal_angry
+  animate tab indignant
+  authorities +5
+end
+
+pcall commentary_agent_choice
+
+wait 2
+hide_all_characters
+commit_stats interlude

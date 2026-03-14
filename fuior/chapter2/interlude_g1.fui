@@ -1,0 +1,63 @@
+load_interlude office_floor
+if has_joseph
+  load_characters jen tab mordecai chief joseph
+else
+  load_characters jen tab mordecai chief
+end
+
+wait 2
+show_character jen LEFT_CENTER normal_angry
+show_character tab RIGHT_CENTER indignant
+show_character mordecai RIGHT hips
+show_character chief LEFT normal
+if has_joseph
+  show_character joseph CENTER_RIGHT neutral
+end
+wait 1
+
+chief: [worried] These fuckers are ready for another attack. We need to treat this as cold, hard fact.
+
+if insanity >= 5
+  choose
+  * <insanity>Bastards! Motherfuckers! Fucking, ggghhm... fucking cunt goblins!</insanity>
+    tab_approval -5
+    if has_joseph
+      joseph_approval -5
+    end
+
+    freedom +1
+    evolution +1
+    if has_joseph
+      animate joseph concern
+    end
+    animate tab disgust
+
+  * <insanity>They shan't best me! I shall foil these evildoers!</insanity>
+    jen_approval -5
+    mordecai_approval -5
+    justice +1
+    lawful +1
+    animate jen mega_dissapointed
+    animate mordecai thinking
+  end
+
+  chief: [cplm] Uh... wha -
+end
+
+chief: [fuck_it] Get to it - now! Identify where this factory is exactly. Evacuate the place urgently.
+
+chief: [get_out] Go! Go! Go!
+
+wait_for_input
+
+hide_character mordecai
+wait 0.2
+hide_character tab
+wait 0.2
+hide_character jen
+wait 0.2
+if has_joseph
+  hide_character joseph
+  wait 0.2
+end
+wait 0.5

@@ -1,0 +1,22 @@
+-- luacheck: no max line length
+return {
+  ["level_test_james.1"] = "They breathe heavily, startled and displeased.",
+  ["level_test_james.2"] = "They groan in pain, giving you a scared look.",
+  ["level_test_james.3"] = "They gasp for air, calling for help.",
+  ["level_test_james.4"] = "They yell out in pain, insisting that they are innocent.",
+  ["level_test_james.5"] = "Let's talk about something else.",
+  ["level_test_james.6"] = "james_dismissive",
+  ["level_test_james.7"] = "james_dunno",
+  ["level_test_james.8"] = "james_headshake",
+  ["level_test_james.9"] = "james_no_problem",
+  ["level_test_james.10"] = "james_point",
+  ["level_test_james.11"] = "james_salute",
+  ["level_test_james.12"] = "james_smug",
+  ["level_test_james.13"] = "james_terrified",
+  ["level_test_james.14"] = "james_smash_table",
+  ["level_test_james.15"] = "james_cough",
+  ["level_test_james.16"] = "I have no idea what you're talking about.",
+  ["level_test_james.17"] = "They look into your eyes, perhaps a bit worried.",
+  ["level_test_james.18"] = "Ok.",
+  ["level_test_james.19"] = "They nod.",
+}

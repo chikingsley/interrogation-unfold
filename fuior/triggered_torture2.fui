@@ -1,0 +1,40 @@
+set_preset_music campaign
+
+load_interlude office_floor
+load_characters tab
+
+wait 2
+
+show_character tab RIGHT normal
+
+wait 1
+
+tab: Can we speak, Detective?
+
+tab: [indignant] We are having repeat occurences of gaps on the interview tapes.
+
+tab: [indignant] I've checked the devices and the problems aren't technical.
+
+tab: [defensive] I won't report this myself... in the interest of team cohesion.
+
+tab: [defensive] But if this persists, the consequences upon this department will come from outside, and will be harsh.
+
+choose
+* Noted, Thompson. Back to work.
+  tab: [aback] I see. Very well.
+  tab_approval -10
+
+* You're right, Tab, but I have to balance procedure and getting results.
+  tab: [indignant] Compromising procedure is already showing a failure to balance. I'll leave you to it.
+  tab_approval -5
+
+* It's so hard to get answers otherwise. But you're right. I'll make sure to always leave it on - it's a promise.
+  tab: [normal] I think that would be best.
+  tab_approval +5
+  set promised_no_torture # If torture is used after this, tab_approval -20
+end
+
+wait_for_input
+hide_all_characters
+
+commit_stats interlude

@@ -1,0 +1,25 @@
+if interlude_c_pleased_tab
+  load_interlude office_floor
+  load_characters jen tab
+
+  wait 2
+  show_character jen LEFT normal
+  show_character tab RIGHT normal
+  wait 1
+
+  tab: [defensive] We have a high probability track. We've decoded probable meanings for many of their terms - enough to understand basic plans.
+
+  tab: [asking] We're dealing with a cell. They're isolated from other cells.
+
+  tab: [explain] And there seems to be something happening today. With over 80% probability - a threat inside the Southbank Mall.
+
+  tab: [defensive] An unknown agent, coded "Patsy", will be on the lookout in front of the Duathlon store, guarding some objective. Possibly explosive.
+
+  jen: [mega_dissapointed] Shit.
+  animate tab normal
+
+  jen: [pointing_angry] Let's get to the cars - we need to canvas that place!
+
+  wait_for_input
+  hide_all_characters
+end

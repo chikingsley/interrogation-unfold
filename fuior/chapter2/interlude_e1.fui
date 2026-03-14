@@ -1,0 +1,60 @@
+load_interlude office_floor
+load_characters jen tab mordecai
+
+wait 2
+show_character jen LEFT
+show_character tab RIGHT_CENTER
+show_character mordecai RIGHT
+wait 1
+
+jen: [explain_smile] Great job boss. Now that we have Adams and poor Nowak, we should get to grilling them.
+
+mordecai: [explain] Which one of us you want on Nowak?
+
+unset novak_assignee
+unset adams_assignee
+
+# mark who took it. That character cannot be chosen in the next choice, nor be assigned missions in the next CP.
+choose
+* Tab, you take Nowak.
+  novak_assignee = "tab"
+  hide_bubbles
+  animate jen normal
+  animate tab listening
+  animate mordecai normal
+
+* Jennifer, you take Nowak.
+  novak_assignee = "jen"
+  hide_bubbles
+  animate jen normal_smile
+  animate tab listening
+  animate mordecai normal
+
+* Morty, you take Nowak.
+  novak_assignee = "mordecai"
+  hide_bubbles
+  animate jen normal
+  animate tab listening
+  animate mordecai proud
+end
+
+wait 1.5
+tab: [explain] And on Gabriel Adams?
+
+choose
+* [novak_assignee != "mordecai"] Morty, you take Adams.
+  adams_assignee = "mordecai"
+* [novak_assignee != "jen"] Jennifer, you take Adams.
+  adams_assignee = "jen"
+* [novak_assignee != "tab"] Tab, you take Adams.
+  adams_assignee = "tab"
+* Adams won't give us anything. I want the rest of you ready for any mission, instead.
+end
+
+hide_bubbles
+animate jen normal
+animate tab listening
+animate mordecai normal
+
+wait 2
+hide_all_characters

@@ -1,0 +1,57 @@
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: We've evacuated the factory.
+
+dummy: And we've determined that there could have been only one way for someone to circumvent the system and bring in any explosives.
+
+dummy: It needs to have been someone with special access to the digital security system.
+
+dummy: The system does confirm that special access was used during this last week. This was the first time in months.
+
+dummy: And only three people have special access.
+
+dummy: The CEO and factory owner, one Aaron King.
+
+dummy: The Chief of Security, one Steve Muradian.
+
+dummy: And the police officer that audited their security system eighteen months ago. To clear it as safe.
+
+dummy: ...
+
+dummy: One Tab Thompson.
+
+dummy: I hope you understand. Tab has to be a part of this questioning.
+
+choose
+* That's bullshit. You know full well Tab can't have anything to do with this!
+  authorities -5
+  freedom +1
+  equity +1
+
+
+  dummy: Well, I need you to include Thompson in this questioning - as a real subject. Imagine how it would look, otherwise.
+
+  dummy: Not to mention how this Liberation Front has a shockingly wide spectrum of members.
+
+* I understand. We can't look like we're giving our own a pass.
+  lawful +1
+
+  dummy: Exactly. Not to mention how this Liberation Front has a shockingly wide spectrum of members.
+
+* Absolutely. I'll be sure to grill Tab as seriously as the rest. We can't be totally sure they're not involved.
+  authorities +5
+  justice +1
+  dummy: Very well.
+end
+
+dummy: Get in there and get a location for those explosives, before they blow up the factory.
+
+dummy: Meanwhile, we'll try to get this Benno Weiss who is hiding with his uncle out of state.
+
+wait_for_input
+hide_all_characters
+commit_stats interlude

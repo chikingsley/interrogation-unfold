@@ -1,0 +1,34 @@
+load_interlude office_floor
+load_characters tab
+
+wait 2
+show_character tab LEFT normal
+wait 1
+
+tab: [defensive] If I may briefly interrupt you with a social matter?
+
+tab: [normal] The team is partaking in socialising at Hannigan's tonight.
+
+tab: [normal] Would you like to join us?
+
+choose
+* No can do, sorry. I have to go to this media training thing. It's all about how you talk to the press. Have fun.
+  press +5
+  lawful +1
+  #do not go to hannigan2 next
+
+* Sure, I'll see you all there.
+  tab_approval +5
+  jen_approval +5
+  mordecai_approval +5
+  joseph_approval +5
+  set hannigan2
+  #fade to black: Text: Later that evening
+  #go to hannigan2 next
+end
+
+hide_bubbles
+wait 1
+
+hide_all_characters
+commit_stats interlude

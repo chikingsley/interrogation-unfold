@@ -1,0 +1,69 @@
+### To run before the Professor Olaru sit down. Uses meet_marin
+
+set_preset_music campaign
+
+load_interlude office_floor
+
+if meet_marin = "jen"
+  load_characters jen
+
+  wait 2
+  show_character jen LEFT normal
+  wait 1
+
+  jen: [pointing_smile] Doctor Olaru, from the University, is here to speak to you. She is in the meeting room already.
+
+  jen: [explain_smile] Seems quite lovely!
+
+  jen: [normal_smile] She should be able to shed some light on the Front's motives.
+
+  wait_for_input
+  hide_character jen
+
+elseif meet_marin = "joseph"
+  load_characters joseph
+
+  wait 2
+  show_character joseph LEFT neutral
+  wait 1
+
+  joseph: [dismissive] Brought that hot little number, Doctor Olaru, to the meeting room for you.
+
+  joseph: [neutral] Extract that quality University insight from her, and we can use it against the Front.
+
+  joseph: [smile] And maybe after, I can extract a phone number...
+
+  wait_for_input
+  hide_character joseph
+
+elseif meet_marin = "mordecai"
+  load_characters mordecai
+
+  wait 2
+  show_character mordecai LEFT normal
+  wait 1
+
+  mordecai: [point] Doctor Olaru's in the meeting room for you.
+
+  mordecai: [explain] Maybe she can give us the lowdown on how the Front actually thinks.
+
+  wait_for_input
+  hide_character mordecai
+
+else # if meet_marin = "tab"
+  load_characters tab
+
+  wait 2
+  show_character tab LEFT normal
+  wait 1
+
+  tab: [asking] Professor Olaru is waiting in the meeting room to speak to you.
+
+  tab: [explain] She has rich insight into the ideology of such groups.
+
+  tab: [listening] She can surely enlighten us about the Liberation Front's essence.
+
+  wait_for_input
+  hide_character tab
+
+end

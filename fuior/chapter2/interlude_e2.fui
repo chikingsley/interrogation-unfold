@@ -1,0 +1,35 @@
+load_interlude office_floor
+load_characters jen tab mordecai
+
+wait 2
+show_character jen LEFT normal
+show_character mordecai LEFT_CENTER normal
+show_character tab RIGHT normal
+
+wait 1
+
+if adams_assignee = "jen"
+  jen: Countless hours of grilling Adams, and I have nothing.
+elseif adams_assignee = "mordecai"
+  mordecai: Countless hours of grilling Adams, and I have nothing.
+elseif adams_assignee = "tab"
+  tab: Countless hours of grilling Adams, and I have nothing.
+end
+
+if novak_assignee = "jen"
+  jen: Well, I bring good news.
+  jen: It was a long questioning, but I've managed to gather an extensive list of descriptions and partial names from Nowak.
+elseif novak_assignee = "mordecai"
+  mordecai: Well, I bring good news.
+  mordecai: It was a long questioning, but I've managed to gather an extensive list of descriptions and partial names from Nowak.
+elseif novak_assignee = "tab"
+  tab: Well, I bring good news.
+  tab: It was a long questioning, but I've managed to gather an extensive list of descriptions and partial names from Nowak.
+end
+
+tab: [defensive] Each is a potential hit or a dud. We have to start digging into this list.
+
+jen: [pointing] There is a full name here. Helene Koufos. I'll see if I can track her down.
+
+wait_for_input
+hide_all_characters

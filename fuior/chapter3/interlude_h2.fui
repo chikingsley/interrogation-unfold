@@ -1,0 +1,22 @@
+load_interlude office_floor
+load_characters chief elias2
+
+wait 2
+show_character chief LEFT normal
+show_character elias2 RIGHT normal
+wait 1
+
+chief: [normal] Detective, this is Elias Hall, Internal Affairs.
+
+elias2: [normal] Greetings.
+
+chief: [worried] If you're both ready, head in for questioning.
+
+elias2: [normal] I have my case file ready. We can go ahead.
+
+chief: [thinking] I look forward to hearing your conclusions after you're done, Mr. Hall.
+
+elias2: [alternate] I'm sure you are, Chief Anderson. I'm sure you are.
+
+wait_for_input
+hide_all_characters

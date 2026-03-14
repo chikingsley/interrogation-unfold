@@ -1,0 +1,32 @@
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: I've been protecting you, because you're clearly getting results.
+
+dummy: But push has come to shove. There's an internal investigation running against you.
+
+dummy: They're currently reviewing documents, taking testimonies.
+
+if insanity >= 5
+  choose
+  * <insanity>This cur dares to question my honor?!</insanity>
+    authorities -5
+    evolution +1
+
+  * <insanity>Psh, ain't no thang, Chief. I'm un-fuckin'-touchable. Nuh-uh. Comin' after me, is he?</insanity>
+    authorities -5
+    freedom +1
+  end
+
+  dummy: Erm... Yes?
+end
+
+dummy: Be ready to be interrogated before this internal investigation's conclusion.
+
+dummy: The IA asshole running it seems dead set on burying you, so be careful.
+
+wait_for_input
+hide_all_characters

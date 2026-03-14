@@ -1,0 +1,21 @@
+load_interlude office_floor
+load_characters jen tab mordecai
+
+wait 2
+show_character jen LEFT
+show_character tab RIGHT_CENTER
+show_character mordecai RIGHT
+wait 1
+
+jen: [explain] We've tracked down the people in the picture.
+
+mordecai: [gun] We've brought them in. We have them in the interrogation rooms.
+animate jen normal
+
+tab: [defensive] We have a sales specialist working in the building, a priest that runs the Humanitas charity and their assistant-protege.
+
+tab: [listening] The case files are ready.
+animate mordecai normal
+
+wait_for_input
+hide_all_characters

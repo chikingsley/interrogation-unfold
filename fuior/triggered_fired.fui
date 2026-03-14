@@ -1,0 +1,22 @@
+set_preset_music campaign
+
+load_interlude chief_office
+load_characters dummy
+
+show_character dummy CHIEF false chief
+wait 2
+
+dummy: Enough is enough.
+
+dummy: I can't keep you on the job with the way you're performing.
+
+dummy: You're off the Liberation Front.
+
+dummy: And suspended indefinitely pending further internal investigation into your actions and overall competence.
+
+dummy: Leave your badge, gun - and get out.
+
+wait_for_input
+hide_bubbles
+
+pcall rewind

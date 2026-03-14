@@ -2,9 +2,6 @@
 game.arcd
 game.arci
 
-# Full extracted output (3.4GB, regenerate with: uv run extract.py)
-output/
-
 # Python
 __pycache__/
 *.pyc

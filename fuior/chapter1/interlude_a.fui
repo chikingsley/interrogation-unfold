@@ -1,0 +1,46 @@
+load_interlude office_floor
+load_characters chief mordecai
+
+wait 1.5
+show_character chief LEFT normal
+wait 1
+
+chief: Hey - I need you to come in on a case.
+
+chief: Fischer's brought in a set of guys. They are in the interrogation rooms.
+
+wait_for_input
+
+show_character mordecai RIGHT normal
+
+mordecai: Hey.
+
+chief: We have the vic's husband - the only witness - and the robber that broke in.
+
+chief: [asking] We need your questioning magic in there - a confession - because all we have is circumstantial. You in?
+
+choose
+* Sure thing.
+* Yes, sir.
+  lawful +1
+  evolution +1
+* Ughhhh. Fine, fine...
+  freedom +1
+end
+
+chief: [normal] So the story is this Cox broke in armed with a low cal piece, holding this Peterson up and tying him to a chair.
+
+chief: [bossss] Wife comes in, jumps for the phone, Cox drops her with two shots to the back before bolting.
+
+chief: [normal] We have the gun. No prints.
+
+mordecai: [hips] This Peterson was as cool as a cucumber: his wife's body just lying there in the other room.
+
+mordecai: Managed to track down and also grab Cox. Street contacts helped.
+
+chief: But we still don't have a clear picture of the murder.
+
+chief: [fuck_it] Check out the files, grill them cross-examination, get me a confession. You have this.
+
+wait_for_input
+hide_all_characters

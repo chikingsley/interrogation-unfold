@@ -1,0 +1,56 @@
+load_interlude office_floor
+if has_joseph
+  load_characters tab jen joseph
+else
+  load_characters tab jen
+end
+
+wait 2
+
+show_character tab RIGHT normal
+if has_joseph
+  show_character joseph RIGHT_CENTER neutral
+end
+wait 1
+
+tab: [asking] Morty called. The flight the four were on is about to take off.
+
+tab: [asking] He doesn't technically have a warrant, and it seems the air marshals won't let him take all of four of them.
+
+tab: [explain] They'll only give him two. Say he can handle escorting them himself.
+
+tab: [explain] It's a procedurally stupid situation, but Morty will need a decision. Now.
+
+tab: [asking] You'll have to tell him the two persons you want brought in from the four suspects.
+
+wait_for_input
+hide_bubbles
+animate tab normal
+
+wait 1
+show_character jen LEFT normal
+
+jen: [normal_angry] I'm afraid, I have more bad news on top of that.
+
+jen: [pointing_angry] Abraham Jamail just called. The top hotshot criminal lawyer, "Honest Abe" from the TV commercials.
+
+jen: [explain_angry] It turns out he's been hired by anonymous parties to represent all of the four suspects on the plane.
+
+if has_joseph
+  joseph: [explaining] The moment he's here, you can consider the interrogation over. All we have is circumstantial.
+  wait_for_input
+  animate joseph neutral
+else
+  jen: [explain_angry] The moment he's here, you can consider the interrogation over. All we have is circumstantial.
+end
+
+jen: [explain_angry] He's fortunately coming in from outside of town, so Morty should be able to bring in your chosen two a bit earlier than his arrival.
+
+if has_joseph
+  joseph: [angry_point] You simply must draw from them some sort of confirmation of who might be Liberation Front leadership before he arrives!
+else
+  jen: [normal_angry] You need to get some sort of confirmation of who might be Liberation Front leadership before he arrives.
+end
+
+wait_for_input
+hide_all_characters

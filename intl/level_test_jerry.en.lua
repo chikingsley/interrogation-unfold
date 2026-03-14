@@ -1,0 +1,21 @@
+-- luacheck: no max line length
+return {
+  ["level_test_jerry.1"] = "They breathe heavily, startled and displeased.",
+  ["level_test_jerry.2"] = "They groan in pain, giving you a scared look.",
+  ["level_test_jerry.3"] = "They gasp for air, calling for help.",
+  ["level_test_jerry.4"] = "They yell out in pain, insisting that they are innocent.",
+  ["level_test_jerry.5"] = "Let's talk about something else.",
+  ["level_test_jerry.6"] = "shrug",
+  ["level_test_jerry.7"] = "nod",
+  ["level_test_jerry.8"] = "headshake",
+  ["level_test_jerry.9"] = "frown",
+  ["level_test_jerry.10"] = "defence",
+  ["level_test_jerry.11"] = "wtf",
+  ["level_test_jerry.12"] = "idle_scared",
+  ["level_test_jerry.13"] = "nod_long",
+  ["level_test_jerry.14"] = "headshake_double",
+  ["level_test_jerry.15"] = "I have no idea what you're talking about.",
+  ["level_test_jerry.16"] = "They look into your eyes, perhaps a bit worried.",
+  ["level_test_jerry.17"] = "Ok.",
+  ["level_test_jerry.18"] = "They nod.",
+}
