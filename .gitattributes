@@ -1,2 +1,2 @@
-*.arcd filter=lfs diff=lfs merge=lfs -text
-*.arci filter=lfs diff=lfs merge=lfs -text
+# LFS no longer needed - arcd/arci are gitignored
+# Re-extract from /Applications/Interrogation.app if needed
