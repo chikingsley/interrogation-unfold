@@ -5,19 +5,6 @@ game.arci
 # Full extracted output (3.4GB, regenerate with: uv run extract.py)
 output/
 
-# Intermediate decrypted bytecode (regenerate with: uv run decrypt.py)
-decrypted/
-
-# iOS app bundle files (available in /Applications/Interrogation.app)
-Interrogation
-Icon*.png
-Info.plist
-LaunchScreen.storyboardc/
-SC_Info/
-_CodeSignature/
-game.public.der
-banks/
-
 # Python
 __pycache__/
 *.pyc
