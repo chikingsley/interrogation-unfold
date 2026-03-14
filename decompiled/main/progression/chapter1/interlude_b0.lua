@@ -1,0 +1,22 @@
+local fui = require("main.fuior.runtime")
+local compiler = require("main.fuior.compiler")
+local scenes = require("main.progression.scenes")
+local func = function ()
+	return function (fui)
+		local intl = fui.intl(nil)
+
+		fui.load_interlude("chief_office")
+		fui.load_characters("dummy")
+		fui.show_character("dummy", "CHIEF", false, "chief")
+		fui.wait(2)
+		fui.text("dummy", nil, intl("7f031e.interlude_b0.4b9359"))
+		fui.text("dummy", nil, intl("7f031e.interlude_b0.76e4af"))
+		fui.text("dummy", nil, intl("7f031e.interlude_b0.100ff0"))
+		fui.wait_for_input()
+		fui.hide_all_characters()
+	end
+end()
+
+return scenes.skippable(function ()
+	func(fui.new())
+end)
