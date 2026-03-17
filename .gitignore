@@ -1,6 +1,6 @@
-# Large binary game archives (re-extract from /Applications/Interrogation.app)
-game.arcd
-game.arci
+# Game archives (see game/README.md for how to get these)
+game/game.arcd
+game/game.arci
 
 # Python
 __pycache__/
