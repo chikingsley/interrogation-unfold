@@ -62,6 +62,24 @@ To inspect the currently checked-in readable corpus:
 uv run interrogation-unfold inspect
 ```
 
+## Recovering Visual Frames
+
+The iOS payload stores sprite sheets as Defold 1.2.171 protobuf resources. The
+tooling can decode the raw RGBA or luminance-alpha texture, correct the OpenGL
+vertical orientation, read atlas UVs, and crop named animation frames:
+
+```sh
+uv run interrogation-unfold recover-texture \
+  generated/extracted/episodes/characters/diana/diana.texturec \
+  generated/extracted/episodes/characters/diana/diana.texturesetc \
+  generated/recovered/diana \
+  --animation diana_idle \
+  --animation diana_disgust
+```
+
+`ffmpeg` is required. Recovered PNGs remain under ignored `generated/`; do not
+commit or publish the game's copyrighted visual payload.
+
 For the conceptual reading path, start with
 [`docs/learning_map.md`](docs/learning_map.md).
 

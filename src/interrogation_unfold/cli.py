@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import argparse
 from collections.abc import Sequence
+from pathlib import Path
 
 from interrogation_unfold import corpus, decrypt, extract
+from interrogation_unfold.defold_texture import recover_animations
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -22,6 +24,19 @@ def build_parser() -> argparse.ArgumentParser:
         "decrypt",
         help="Decrypt encrypted Defold script resources into generated/decrypted-bytecode/.",
     )
+    recover_parser = subparsers.add_parser(
+        "recover-texture",
+        help="Decode a Defold texture atlas and recover named animation frames.",
+    )
+    recover_parser.add_argument("texturec", type=Path)
+    recover_parser.add_argument("texturesetc", type=Path)
+    recover_parser.add_argument("output_dir", type=Path)
+    recover_parser.add_argument(
+        "--animation",
+        action="append",
+        default=[],
+        help="Animation to recover; repeat the option to select several. Defaults to all.",
+    )
     return parser
 
 
@@ -35,6 +50,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         extract.main()
     elif args.command == "decrypt":
         decrypt.main()
+    elif args.command == "recover-texture":
+        manifest = recover_animations(
+            args.texturec,
+            args.texturesetc,
+            args.output_dir,
+            tuple(args.animation),
+        )
+        animations = manifest["animations"]
+        if not isinstance(animations, dict):
+            raise TypeError
+        print(f"Recovered {len(animations)} animations into {args.output_dir}")
     else:  # pragma: no cover - argparse enforces the command set.
         return 2
 
