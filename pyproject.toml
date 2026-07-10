@@ -1,11 +1,105 @@
+[build-system]
+requires = ["uv_build>=0.11.24,<0.12"]
+build-backend = "uv_build"
+
 [project]
 name = "interrogation-unfold"
 version = "0.1.0"
 description = "Extraction and analysis tools for Interrogation: You Will Be Deceived (Defold game)"
+readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "lz4>=4.4.5",
 ]
 
-[tool.uv]
-dev-dependencies = []
+[project.scripts]
+interrogation-unfold = "interrogation_unfold.cli:main"
+
+[tool.uv.build-backend]
+module-name = "interrogation_unfold"
+module-root = "src"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.15.20",
+    "ty>=0.0.56",
+    "vulture>=2.16",
+]
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["tests"]
+strict_config = true
+strict_markers = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # Rules Ruff documents as conflicting with its formatter.
+    "W191",
+    "E111",
+    "E114",
+    "E117",
+    "D203",
+    "D206",
+    "D213",
+    "D300",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "Q004",
+    "COM812",
+    "COM819",
+    "ISC002",
+    # Deliberate project style for local analysis tooling.
+    "D",
+    "T201",
+    "TRY003",
+    "EM101",
+    "EM102",
+    "ANN401",
+    "PLR0913",
+    "TC001",
+    "TC002",
+    "TC003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "S101",
+    "PLR2004",
+    "INP001",
+    "ARG001",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D107",
+    "ANN001",
+    "ANN002",
+    "ANN003",
+    "ANN201",
+    "ANN202",
+    "ANN204",
+    "TC001",
+    "TC002",
+    "TC003",
+]
+
+[tool.ty.environment]
+python = ".venv"
+
+[tool.ty.rules]
+unused-ignore-comment = "error"
+
+[tool.vulture]
+paths = ["src", "tests"]
+min_confidence = 100

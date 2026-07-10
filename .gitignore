@@ -1,6 +1,13 @@
-# Game archives (see game/README.md for how to get these)
-game/game.arcd
-game/game.arci
+# Local source material and generated outputs
+Interrogation.app/
+raw/app/
+raw/archives/
+generated/
+game.arcd
+game.arci
+output/
+decrypted/
+game/
 
 # Python
 __pycache__/
