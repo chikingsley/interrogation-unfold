@@ -62,6 +62,19 @@ To inspect the currently checked-in readable corpus:
 uv run interrogation-unfold inspect
 ```
 
+To export the shipped Episode 0 academy tutorial as resolved JSON for the
+private browser benchmark in the sibling `episodic` repository:
+
+```sh
+uv run interrogation-unfold export-tutorial \
+  ../episodic/planning/planning-v4/prototypes/benchmarks/interrogation-tutorial/public/interrogation-local/tutorial.json
+```
+
+The export combines the original 15-question/30-answer episode graph with all
+27 instructor lines and an explicit ten-gate trace of
+`main/progression/chapter1/tutorial.lua`. The generated JSON contains original
+dialogue and must remain in the benchmark's ignored local-payload directory.
+
 ## Recovering Visual Frames
 
 The iOS payload stores sprite sheets as Defold 1.2.171 protobuf resources. The

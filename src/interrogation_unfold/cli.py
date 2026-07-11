@@ -8,6 +8,7 @@ from pathlib import Path
 
 from interrogation_unfold import corpus, decrypt, extract
 from interrogation_unfold.defold_texture import recover_animations
+from interrogation_unfold.tutorial_export import export_tutorial
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -37,6 +38,11 @@ def build_parser() -> argparse.ArgumentParser:
         default=[],
         help="Animation to recover; repeat the option to select several. Defaults to all.",
     )
+    tutorial_parser = subparsers.add_parser(
+        "export-tutorial",
+        help="Export the original Episode 0 academy tutorial as resolved local JSON.",
+    )
+    tutorial_parser.add_argument("output_path", type=Path)
     return parser
 
 
@@ -61,6 +67,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if not isinstance(animations, dict):
             raise TypeError
         print(f"Recovered {len(animations)} animations into {args.output_dir}")
+    elif args.command == "export-tutorial":
+        export_tutorial(args.output_path)
+        print(f"Exported original tutorial data to {args.output_path}")
     else:  # pragma: no cover - argparse enforces the command set.
         return 2
 
