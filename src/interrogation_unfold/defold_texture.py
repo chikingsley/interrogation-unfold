@@ -6,6 +6,7 @@ import json
 import shutil
 import struct
 import subprocess
+import zlib
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -16,6 +17,7 @@ TEXTURE_FORMAT_LUMINANCE_ALPHA = 10
 TEXTURE_SET_FIELD_ANIMATION = 2
 TEXTURE_SET_FIELD_TEX_COORDS = 18
 UV_FLOATS_PER_FRAME = 8
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 
 @dataclass(frozen=True)
@@ -154,23 +156,26 @@ def frame_rect(texture_set: TextureSet, frame: int, width: int, height: int) -> 
 
 def decode_atlas(texture: TextureImage, output_path: Path) -> None:
     """Decode an uncompressed iOS Defold texture to a correctly oriented PNG."""
+    rgba = decode_rgba(texture)
+    write_rgba_png(output_path, texture.width, texture.height, rgba)
+
+
+def decode_rgba(texture: TextureImage) -> bytes:
+    """Return top-left-origin RGBA pixels for one extracted Defold texture."""
     ffmpeg = shutil.which("ffmpeg")
     if ffmpeg is None:
-        msg = "ffmpeg is required to recover PNG textures"
+        msg = "ffmpeg is required to decode Defold textures"
         raise RuntimeError(msg)
 
     if texture.format == TEXTURE_FORMAT_RGBA:
         pixel_format = "rgba"
-        filters = "vflip"
     elif texture.format == TEXTURE_FORMAT_LUMINANCE_ALPHA:
         pixel_format = "ya8"
-        filters = "vflip"
     else:
         msg = f"Unsupported Defold texture format: {texture.format}"
         raise ValueError(msg)
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(  # noqa: S603 - ffmpeg path and argument vector are explicit.
+    result = subprocess.run(  # noqa: S603 - ffmpeg path and argument vector are explicit.
         [
             ffmpeg,
             "-hide_banner",
@@ -185,15 +190,59 @@ def decode_atlas(texture: TextureImage, output_path: Path) -> None:
             "-i",
             "pipe:0",
             "-vf",
-            filters,
-            "-frames:v",
-            "1",
-            "-y",
-            str(output_path),
+            "vflip",
+            "-pix_fmt",
+            "rgba",
+            "-f",
+            "rawvideo",
+            "pipe:1",
         ],
         input=texture.data,
+        capture_output=True,
         check=True,
     )
+    expected = texture.width * texture.height * 4
+    if len(result.stdout) != expected:
+        msg = f"Decoded texture has {len(result.stdout)} bytes; expected {expected}"
+        raise ValueError(msg)
+    return result.stdout
+
+
+def crop_rgba(pixels: bytes, image_width: int, rect: FrameRect) -> bytes:
+    """Crop top-left-origin RGBA pixels without spawning another image process."""
+    stride = image_width * 4
+    row_width = rect.width * 4
+    rows = []
+    for row in range(rect.y, rect.y + rect.height):
+        start = row * stride + rect.x * 4
+        rows.append(pixels[start : start + row_width])
+    return b"".join(rows)
+
+
+def _png_chunk(chunk_type: bytes, data: bytes) -> bytes:
+    body = chunk_type + data
+    return struct.pack(">I", len(data)) + body + struct.pack(">I", zlib.crc32(body))
+
+
+def write_rgba_png(path: Path, width: int, height: int, pixels: bytes) -> None:
+    """Write top-left-origin RGBA bytes as a dependency-free PNG."""
+    expected = width * height * 4
+    if len(pixels) != expected:
+        msg = f"RGBA image has {len(pixels)} bytes; expected {expected}"
+        raise ValueError(msg)
+    stride = width * 4
+    scanlines = b"".join(
+        b"\x00" + pixels[row * stride : (row + 1) * stride] for row in range(height)
+    )
+    header = struct.pack(">IIBBBBB", width, height, 8, 6, 0, 0, 0)
+    payload = (
+        PNG_SIGNATURE
+        + _png_chunk(b"IHDR", header)
+        + _png_chunk(b"IDAT", zlib.compress(scanlines))
+        + _png_chunk(b"IEND", b"")
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(payload)
 
 
 def recover_animations(
@@ -201,6 +250,8 @@ def recover_animations(
     texturesetc_path: Path,
     output_dir: Path,
     names: tuple[str, ...] = (),
+    *,
+    include_atlas: bool = True,
 ) -> dict[str, object]:
     """Decode an atlas and crop selected named animations into numbered PNGs."""
     ffmpeg = shutil.which("ffmpeg")
@@ -219,8 +270,9 @@ def recover_animations(
         raise ValueError(msg)
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    atlas_path = output_dir / "atlas.png"
-    decode_atlas(texture, atlas_path)
+    pixels = decode_rgba(texture)
+    if include_atlas:
+        write_rgba_png(output_dir / "atlas.png", texture.width, texture.height, pixels)
 
     animation_manifest: dict[str, object] = {}
     for animation in selected:
@@ -230,22 +282,11 @@ def recover_animations(
         for output_index, atlas_index in enumerate(range(animation.start, animation.end)):
             rect = frame_rect(texture_set, atlas_index, texture.width, texture.height)
             output_path = animation_dir / f"{output_index:03d}.png"
-            subprocess.run(  # noqa: S603 - ffmpeg path and argument vector are explicit.
-                [
-                    ffmpeg,
-                    "-hide_banner",
-                    "-loglevel",
-                    "error",
-                    "-i",
-                    str(atlas_path),
-                    "-vf",
-                    f"crop={rect.width}:{rect.height}:{rect.x}:{rect.y}",
-                    "-frames:v",
-                    "1",
-                    "-y",
-                    str(output_path),
-                ],
-                check=True,
+            write_rgba_png(
+                output_path,
+                rect.width,
+                rect.height,
+                crop_rgba(pixels, texture.width, rect),
             )
             frames.append(str(output_path.relative_to(output_dir)))
         animation_manifest[animation.name] = {

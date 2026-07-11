@@ -93,6 +93,89 @@ uv run interrogation-unfold recover-texture \
 `ffmpeg` is required. Recovered PNGs remain under ignored `generated/`; do not
 commit or publish the game's copyrighted visual payload.
 
+## Building the Local Asset Library
+
+The single-atlas recovery command is also available as a batch Python workflow:
+
+```sh
+uv run interrogation-unfold build-asset-library --scope all --clean
+```
+
+It writes an ignored, artist-friendly library to `generated/asset-library/`:
+
+```text
+generated/asset-library/
+  index.html                 self-contained searchable animation gallery
+  catalog.json               atlas metadata plus episode/FUIOR source usage
+  characters/
+    alex/interrogation/
+      alex_idle/000.png ...
+      alex_angry/000.png ...
+    alex/character.json       portable per-character runtime manifest
+    jen/interlude/
+      jen_normal/000.png
+      jen_normal_angry/000.png
+    helene/interrogation/logical/
+      helene_idle/000.png ...
+  assets/                    room, UI, case files, outcomes, and cutscenes
+```
+
+The current local payload resolves 173 of 175 atlas descriptions into 2,008
+named clips and 6,077 PNG frames. The character portion contains 727 atlas
+clips and 4,734 frames. Another 64 logical character sequences are reconstructed
+from the readable Lua animation tables into 731 ordered, hard-linked PNG paths.
+Two one-frame final-cutscene support atlases reference texture payloads that are
+not present in the shipped extraction; the catalog marks them explicitly rather
+than silently dropping them.
+
+Every catalog animation retains its Defold width, height, FPS, playback mode,
+and source paths. Usage records connect animation names to episode answer IDs,
+torture reactions, animation effects, and FUIOR scene commands. Open
+`generated/asset-library/index.html` directly in a browser to search and play
+the recovered sequences. Each character's smaller `character.json` is the
+renderer-neutral contract for future React, Pixi, or native experiments; those
+consumers do not need to parse Defold resources.
+
+The benchmark's `build-private-payload.sh` remains a thin orchestration layer:
+it calls this repository's Python CLI for data and texture recovery, then uses
+`vgmstream`/`ffmpeg` for the app-specific FMOD audio extraction. Reusable
+archive, atlas, catalog, and usage-index logic belongs in the Python package.
+
+## Operation Platform Two
+
+[`prototypes/operation-platform-two/`](prototypes/operation-platform-two/) is a
+complete first pass at the combined learning-and-application loop. Its authored
+20-minute operation contains 198 autoplay cues with a 38% planned-silence
+envelope:
+
+1. hear a target French call with support;
+2. explicitly train and retrieve ten complete phrases;
+3. rehearse the call in mixed order;
+4. hear the live call without English; and
+5. configure a station intercept from the evidence.
+
+Prepare its small ignored visual payload from the generated library, then run
+the Vite app:
+
+```sh
+uv run interrogation-unfold prepare-operation-prototype --clean
+cd prototypes/operation-platform-two
+bun install
+bun run validate:lesson
+bun run dev
+```
+
+The prepared payload is 19 MB locally, selects nine tutor/contact animations
+and all eleven case-file opening states, and hard-links recovered frames when
+the filesystem permits it. It must remain private and uncommitted. The app uses
+browser speech synthesis as a timing stand-in; a native French reviewer must
+approve the script and any final baked voice.
+
+The evidence and constraints behind the lesson are recorded in
+[`analysis/pimsleur_2002_prototype_audit.md`](analysis/pimsleur_2002_prototype_audit.md).
+The browser scene/runtime split is documented in
+[`analysis/browser_scene_architecture.md`](analysis/browser_scene_architecture.md).
+
 For the conceptual reading path, start with
 [`docs/learning_map.md`](docs/learning_map.md).
 

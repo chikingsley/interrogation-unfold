@@ -7,7 +7,12 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from interrogation_unfold import corpus, decrypt, extract
+from interrogation_unfold.asset_library import DEFAULT_OUTPUT_DIR, build_asset_library
 from interrogation_unfold.defold_texture import recover_animations
+from interrogation_unfold.operation_prototype import (
+    DEFAULT_PROTOTYPE_ASSET_DIR,
+    prepare_operation_prototype,
+)
 from interrogation_unfold.tutorial_export import export_tutorial
 
 
@@ -43,6 +48,53 @@ def build_parser() -> argparse.ArgumentParser:
         help="Export the original Episode 0 academy tutorial as resolved local JSON.",
     )
     tutorial_parser.add_argument("output_path", type=Path)
+    library_parser = subparsers.add_parser(
+        "build-asset-library",
+        help="Recover extracted atlases into folders and build a browsable source-aware catalog.",
+    )
+    library_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=DEFAULT_OUTPUT_DIR,
+        help=f"Library destination. Defaults to {DEFAULT_OUTPUT_DIR}.",
+    )
+    library_parser.add_argument(
+        "--scope",
+        choices=("characters", "all"),
+        default="all",
+        help="Recover character atlases only or the complete visual payload.",
+    )
+    library_parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="Remove the destination before rebuilding it.",
+    )
+    library_parser.add_argument(
+        "--metadata-only",
+        action="store_true",
+        help="Build the catalog without decoding PNG frames.",
+    )
+    operation_parser = subparsers.add_parser(
+        "prepare-operation-prototype",
+        help="Prepare the ignored private asset pack for Operation Platform Two.",
+    )
+    operation_parser.add_argument(
+        "--asset-library",
+        type=Path,
+        default=DEFAULT_OUTPUT_DIR,
+        help=f"Recovered asset library. Defaults to {DEFAULT_OUTPUT_DIR}.",
+    )
+    operation_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=DEFAULT_PROTOTYPE_ASSET_DIR,
+        help=f"Private asset destination. Defaults to {DEFAULT_PROTOTYPE_ASSET_DIR}.",
+    )
+    operation_parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="Remove the destination before preparing it.",
+    )
     return parser
 
 
@@ -70,6 +122,28 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif args.command == "export-tutorial":
         export_tutorial(args.output_path)
         print(f"Exported original tutorial data to {args.output_path}")
+    elif args.command == "build-asset-library":
+        catalog = build_asset_library(
+            output_dir=args.output_dir,
+            scope=args.scope,
+            clean=args.clean,
+            metadata_only=args.metadata_only,
+        )
+        summary = catalog["summary"]
+        print(
+            f"Built {summary['atlases']} atlases, {summary['atlas_clips']} clips, "
+            f"and {summary['logical_sequences']} logical sequences in {args.output_dir}"
+        )
+    elif args.command == "prepare-operation-prototype":
+        manifest = prepare_operation_prototype(
+            asset_library=args.asset_library,
+            output_dir=args.output_dir,
+            clean=args.clean,
+        )
+        print(
+            f"Prepared {len(manifest['animations'])} animations and "
+            f"{len(manifest['caseFile'])} case-file states in {args.output_dir}"
+        )
     else:  # pragma: no cover - argparse enforces the command set.
         return 2
 

@@ -14,5 +14,12 @@ __pycache__/
 *.pyc
 .venv/
 
+# Browser prototypes
+node_modules/
+dist/
+.tsbuildinfo/
+.vite-cache/
+prototypes/*/public/private-assets/
+
 # macOS
 .DS_Store
