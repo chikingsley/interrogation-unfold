@@ -1,79 +1,40 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 
 import {
+  beatMode,
   lesson,
   phaseLabel,
-  plannedDurationSeconds,
-  type Cue,
+  phaseOrder,
+  type Beat,
+  type Evidence,
   type Phase,
 } from "./lesson.ts";
 
 interface AnimationAsset {
   frames: string[];
   fps: number;
-  width: number;
-  height: number;
 }
 
 interface AssetManifest {
-  notice: string;
   animations: Record<string, AnimationAsset>;
   scene: Record<string, string>;
-  caseFile: string[];
 }
 
-interface Intercept {
-  place: string;
-  time: string;
-  platform: string;
-  target: string;
+interface AudioAsset {
+  path: string;
+  speaker: string;
+  seconds: number;
 }
 
-const emptyIntercept: Intercept = { place: "", time: "", platform: "", target: "" };
-const solution: Intercept = {
-  place: "Gare du Nord",
-  time: "21:00",
-  platform: "2",
-  target: "Red coat",
-};
+type AudioManifest = Record<string, AudioAsset>;
 
-const phaseOrder: Phase[] = [
-  "briefing",
-  "training",
-  "rehearsal",
-  "deployment",
-  "wiretap",
-  "decision",
-  "debrief",
-];
-
-function formatTime(seconds: number): string {
-  const rounded = Math.round(seconds);
-  return `${Math.floor(rounded / 60)}:${String(rounded % 60).padStart(2, "0")}`;
+interface Dispatch {
+  hour: number;
+  platform: number;
 }
 
 function wait(milliseconds: number): Promise<void> {
   return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
-}
-
-function speak(cue: Cue, speed: number): Promise<void> {
-  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
-    return wait((cue.plannedSeconds - cue.waitSeconds) * 1000 / speed);
-  }
-
-  return new Promise((resolve) => {
-    const utterance = new SpeechSynthesisUtterance(cue.text);
-    const voices = window.speechSynthesis.getVoices();
-    const exactVoice = voices.find((voice) => voice.lang === cue.locale);
-    const languageVoice = voices.find((voice) => voice.lang.startsWith(cue.locale.slice(0, 2)));
-    utterance.voice = exactVoice ?? languageVoice ?? null;
-    utterance.lang = cue.locale;
-    utterance.rate = Math.min(1.45, speed * (cue.locale === "fr-FR" ? 0.88 : 0.96));
-    utterance.pitch = cue.speaker === "courier" ? 0.82 : 1;
-    utterance.onend = () => resolve();
-    utterance.onerror = () => resolve();
-    window.speechSynthesis.speak(utterance);
-  });
 }
 
 function AnimatedSprite({
@@ -102,143 +63,139 @@ function AnimatedSprite({
   return <img className={className} src={asset.frames[frame]} alt="" draggable={false} />;
 }
 
-function CaseFile({ manifest, open }: { manifest: AssetManifest; open: boolean }) {
-  const [frame, setFrame] = useState(0);
-
-  useEffect(() => {
-    if (!open) {
-      setFrame(0);
-      return;
-    }
-    let nextFrame = 0;
-    const timer = window.setInterval(() => {
-      nextFrame += 1;
-      setFrame(Math.min(nextFrame, manifest.caseFile.length - 1));
-      if (nextFrame >= manifest.caseFile.length - 1) window.clearInterval(timer);
-    }, 67);
-    return () => window.clearInterval(timer);
-  }, [manifest, open]);
-
-  const rawProgress = open ? frame / Math.max(1, manifest.caseFile.length - 1) : 0;
-  const easedProgress = 1 - (rawProgress - 1) ** 4;
-  const caseFileStyle = {
-    width: `${18 + 74 * easedProgress}%`,
-    left: `${23 + 27 * easedProgress}%`,
-    bottom: `${7 + 43 * easedProgress}%`,
-    transform: `translate(-${50 * easedProgress}%, ${50 * easedProgress}%)`,
-  } as CSSProperties;
-
+function EvidenceBoard({ evidence, hidden }: { evidence: Evidence; hidden: boolean }) {
+  if (hidden || evidence === "live" || evidence === "decision") return null;
   return (
-    <img
-      className={`case-file ${open ? "is-open" : ""}`}
-      src={manifest.caseFile[frame]}
-      alt="Operation dossier"
-      draggable={false}
-      style={caseFileStyle}
-    />
+    <div className={`evidence-board evidence-${evidence}`}>
+      <div className="evidence-tab">OP–01 / SOURCE FILE</div>
+      {evidence === "file-eight" && (
+        <div className="clock-reading"><small>RECORDED HANDOFF</small><strong>20:00</strong></div>
+      )}
+      {evidence === "correction" && (
+        <div className="correction-reading">
+          <span><small>OLD</small><s>20:00</s></span>
+          <i>→</i>
+          <span><small>REVISED</small><strong>21:00</strong></span>
+        </div>
+      )}
+      {evidence === "platform" && (
+        <div className="platform-reading"><small>HANDOFF PLATFORM</small><strong>02</strong></div>
+      )}
+    </div>
   );
 }
 
-function DecisionPanel({
-  manifest,
-  onSubmit,
-}: {
-  manifest: AssetManifest;
-  onSubmit: (intercept: Intercept) => void;
-}) {
-  const [intercept, setIntercept] = useState(emptyIntercept);
-  const ready = Object.values(intercept).every(Boolean);
+function ResponseSignal({ beat, active }: { beat: Beat; active: boolean }) {
+  const style = { "--response-ms": `${beat.responseMs ?? 4000}ms` } as CSSProperties;
+  return (
+    <div className={`response-signal ${active ? "active" : ""}`} style={style}>
+      <div className="record-core"><i /></div>
+      <strong>YOUR LINE</strong>
+      <span>Speak before Diana returns</span>
+      <div className="response-track"><i key={`${beat.id}-${active}`} /></div>
+    </div>
+  );
+}
 
-  function select(field: keyof Intercept, value: string) {
-    setIntercept((current) => ({ ...current, [field]: value }));
-  }
+function DispatchPanel({ onSubmit }: { onSubmit: (dispatch: Dispatch) => void }) {
+  const [hour, setHour] = useState(20);
+  const [platform, setPlatform] = useState(1);
 
   return (
-    <div className="decision-layer">
-      <CaseFile manifest={manifest} open />
-      <div className="decision-sheet">
-        <div className="dossier-heading">
-          <span>FIELD AUTHORIZATION / 02</span>
-          <strong>CONFIGURE INTERCEPT</strong>
+    <div className="dispatch-layer">
+      <div className="dispatch-sheet">
+        <div className="dispatch-heading"><span>FIELD TEAM / HOLDING</span><strong>SET INTERCEPT</strong></div>
+        <div className="dispatch-controls">
+          <label>
+            <span>TEAM CLOCK</span>
+            <output>{String(hour).padStart(2, "0")}:00</output>
+            <input type="range" min="20" max="22" step="1" value={hour} onChange={(event) => setHour(Number(event.target.value))} />
+            <i className="range-labels"><b>20</b><b>21</b><b>22</b></i>
+          </label>
+          <label>
+            <span>RAIL PLATFORM</span>
+            <output>0{platform}</output>
+            <input type="range" min="1" max="3" step="1" value={platform} onChange={(event) => setPlatform(Number(event.target.value))} />
+            <i className="range-labels"><b>01</b><b>02</b><b>03</b></i>
+          </label>
         </div>
-        <div className="decision-grid">
-          <Choice label="Place" value={intercept.place} options={["Gare du Nord", "Hotel bar", "Airport"]} onChange={(value) => select("place", value)} />
-          <Choice label="Time" value={intercept.time} options={["20:00", "21:00", "22:00"]} onChange={(value) => select("time", value)} />
-          <Choice label="Platform" value={intercept.platform} options={["1", "2", "3"]} onChange={(value) => select("platform", value)} />
-          <Choice label="Courier" value={intercept.target} options={["Black hat", "Red coat", "Blue scarf"]} onChange={(value) => select("target", value)} />
-        </div>
-        <button className="authorize" disabled={!ready} onClick={() => onSubmit(intercept)}>
-          Authorize team
-        </button>
+        <button className="dispatch-button" onClick={() => onSubmit({ hour, platform })}>DISPATCH TEAM</button>
       </div>
     </div>
   );
 }
 
-function Choice({
-  label,
-  value,
-  options,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  options: string[];
-  onChange: (value: string) => void;
-}) {
+function Outcome({ dispatch, onReplay, onRetry }: { dispatch: Dispatch; onReplay: () => void; onRetry: () => void }) {
+  const correct = dispatch.hour === 21 && dispatch.platform === 2;
   return (
-    <label className="choice">
-      <span>{label}</span>
-      <select value={value} onChange={(event) => onChange(event.target.value)}>
-        <option value="">Select</option>
-        {options.map((option) => (
-          <option key={option}>{option}</option>
-        ))}
-      </select>
-    </label>
+    <div className={`outcome-layer ${correct ? "success" : "failure"}`}>
+      <div className="outcome-card">
+        <span>{correct ? "INTERCEPT CONFIRMED" : "HANDOFF MISSED"}</span>
+        <strong>{correct ? "PACKAGE SECURED" : `${String(dispatch.hour).padStart(2, "0")}:00 / PLATFORM 0${dispatch.platform}`}</strong>
+        <p>{correct ? "The spoken correction changed the field plan." : "The team moved on the wrong intelligence."}</p>
+        <div><button onClick={onReplay}>REPLAY LIVE CALL</button><button onClick={onRetry}>RESET DISPATCH</button></div>
+      </div>
+    </div>
   );
 }
 
-function MissingAssets({ error }: { error: string }) {
+function MissingPayload({ kind, detail }: { kind: "assets" | "audio"; detail: string }) {
+  const command = kind === "assets"
+    ? "~/.local/bin/uv run interrogation-unfold prepare-operation-prototype --clean"
+    : "~/.local/bin/uv run --script tools/bake_operation_audio.py";
   return (
-    <main className="missing-assets">
-      <p className="eyebrow">Private asset pack missing</p>
-      <h1>Prepare the recovered scene payload.</h1>
-      <code>uv run interrogation-unfold prepare-operation-prototype --clean</code>
-      <p>{error}</p>
+    <main className="missing-payload">
+      <p>PRIVATE {kind.toUpperCase()} PAYLOAD MISSING</p>
+      <h1>Prepare the local operation.</h1>
+      <code>{command}</code>
+      <small>{detail}</small>
     </main>
   );
 }
 
 export default function App() {
   const [manifest, setManifest] = useState<AssetManifest | null>(null);
-  const [assetError, setAssetError] = useState("");
-  const [cueIndex, setCueIndex] = useState(0);
+  const [audioManifest, setAudioManifest] = useState<AudioManifest | null>(null);
+  const [payloadError, setPayloadError] = useState<{ kind: "assets" | "audio"; detail: string } | null>(null);
+  const [beatIndex, setBeatIndex] = useState(() => {
+    const requestedBeat = new URLSearchParams(window.location.search).get("beat");
+    const requestedIndex = lesson.findIndex((item) => item.id === requestedBeat);
+    return requestedIndex >= 0 ? requestedIndex : 0;
+  });
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
-  const [interceptResult, setInterceptResult] = useState<Intercept | null>(null);
+  const [dispatch, setDispatch] = useState<Dispatch | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const runToken = useRef(0);
 
-  const currentCue = lesson[cueIndex];
-  const elapsed = useMemo(
-    () => lesson.slice(0, cueIndex).reduce((total, cue) => total + cue.plannedSeconds, 0),
-    [cueIndex],
-  );
-  const progress = elapsed / plannedDurationSeconds;
+  const beat = lesson[beatIndex];
+  const progress = (beatIndex + 1) / lesson.length;
+  const liveStart = useMemo(() => lesson.findIndex((item) => item.phase === "wiretap" && item.speaker === "courier"), []);
 
   useEffect(() => {
-    fetch("./private-assets/manifest.json")
-      .then((response) => {
-        if (!response.ok) throw new Error(`Asset manifest returned ${response.status}`);
+    Promise.all([
+      fetch("./private-assets/manifest.json").then((response) => {
+        if (!response.ok) throw new Error(`assets:${response.status}`);
         return response.json() as Promise<AssetManifest>;
+      }),
+      fetch("./private-audio/manifest.json").then((response) => {
+        if (!response.ok) throw new Error(`audio:${response.status}`);
+        return response.json() as Promise<AudioManifest>;
+      }),
+    ])
+      .then(([assets, audio]) => {
+        setManifest(assets);
+        setAudioManifest(audio);
       })
-      .then(setManifest)
-      .catch((error: unknown) => setAssetError(error instanceof Error ? error.message : String(error)));
+      .catch((error: unknown) => {
+        const detail = error instanceof Error ? error.message : String(error);
+        setPayloadError({ kind: detail.startsWith("assets:") ? "assets" : "audio", detail });
+      });
   }, []);
 
   useEffect(() => {
-    if (!playing || !currentCue || currentCue.kind === "decision") {
-      if (currentCue?.kind === "decision") setPlaying(false);
+    if (!playing || !beat || beat.kind === "decision" || dispatch) {
+      if (beat?.kind === "decision") setPlaying(false);
       return;
     }
 
@@ -246,68 +203,74 @@ export default function App() {
     runToken.current = token;
     let cancelled = false;
 
-    async function runCue() {
-      await speak(currentCue, speed);
-      await wait(currentCue.waitSeconds * 1000 / speed);
+    async function runBeat() {
+      if (beat.kind === "response") {
+        await wait((beat.responseMs ?? 4000) / speed);
+      } else if (beat.audioId) {
+        const source = audioManifest?.[beat.audioId]?.path ?? `./private-audio/${beat.audioId}.wav`;
+        const audio = new Audio(source);
+        audioRef.current = audio;
+        audio.playbackRate = speed;
+        await new Promise<void>((resolve) => {
+          audio.onended = () => resolve();
+          audio.onerror = () => {
+            setPayloadError({ kind: "audio", detail: `Could not play ${source}` });
+            resolve();
+          };
+          void audio.play().catch(() => resolve());
+        });
+        await wait((beat.postMs ?? 0) / speed);
+      }
       if (cancelled || runToken.current !== token) return;
-      if (cueIndex < lesson.length - 1) setCueIndex((index) => index + 1);
+      if (beatIndex < lesson.length - 1) setBeatIndex((index) => index + 1);
       else setPlaying(false);
     }
 
-    void runCue();
+    void runBeat();
     return () => {
       cancelled = true;
       runToken.current += 1;
-      window.speechSynthesis?.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
     };
-  }, [cueIndex, currentCue, playing, speed]);
+  }, [audioManifest, beat, beatIndex, dispatch, playing, speed]);
 
   function jumpTo(index: number, shouldPlay = false) {
-    window.speechSynthesis?.cancel();
-    setCueIndex(Math.max(0, Math.min(index, lesson.length - 1)));
+    setDispatch(null);
+    setBeatIndex(Math.max(0, Math.min(index, lesson.length - 1)));
     setPlaying(shouldPlay);
   }
 
   function jumpToPhase(phase: Phase) {
-    const index = lesson.findIndex((cue) => cue.phase === phase);
+    const index = lesson.findIndex((item) => item.phase === phase);
     if (index >= 0) jumpTo(index);
   }
 
-  function submitIntercept(intercept: Intercept) {
-    setInterceptResult(intercept);
-    jumpTo(cueIndex + 1, true);
-  }
+  if (payloadError) return <MissingPayload kind={payloadError.kind} detail={payloadError.detail} />;
+  if (!manifest || !audioManifest || !beat) return <div className="loading">Opening secure channel…</div>;
 
-  if (assetError) return <MissingAssets error={assetError} />;
-  if (!manifest || !currentCue) return <div className="loading">Opening secure channel…</div>;
-
-  const isWiretap = currentCue.phase === "wiretap";
-  const isDecision = currentCue.phase === "decision";
-  const handlerVisible = !isWiretap && !isDecision;
-  const contactVisible = isWiretap || currentCue.speaker === "contact" || currentCue.speaker === "courier";
-  const animation = currentCue.animation ?? "tutor_idle";
-  const resultCorrect = interceptResult
-    ? Object.entries(solution).every(([key, value]) => interceptResult[key as keyof Intercept] === value)
-    : null;
-  const responseStyle = { "--response-seconds": `${currentCue.waitSeconds / speed}s` } as CSSProperties;
+  const isResponse = beat.kind === "response";
+  const handlerVisible = beat.shot === "handler";
+  const courierVisible = beat.shot === "courier" || beat.shot === "player-contact" || beat.shot === "two-shot";
+  const contactVisible = beat.shot === "contact" || beat.shot === "two-shot";
+  const courierAnimation = beat.speaker === "courier" ? "alex_idle" : "alex_smile";
+  const contactAnimation = beat.speaker === "contact" ? "diana_interested" : "diana_idle_blink";
 
   return (
-    <main className={`app phase-${currentCue.phase}`}>
+    <main className={`app phase-${beat.phase} shot-${beat.shot}`}>
       <header className="topbar">
-        <div className="brand">
-          <span className="brand-mark">DM</span>
-          <div><strong>DARK MALLARD</strong><small>Field language division</small></div>
-        </div>
-        <div className="operation-title"><span>OP–01</span> PLATFORM TWO</div>
-        <div className={`channel ${isWiretap ? "live" : ""}`}><i /> {isWiretap ? "LIVE CHANNEL" : "SECURE"}</div>
+        <div className="brand"><span>DM</span><strong>DARK MALLARD <small>FIELD LANGUAGE DIVISION</small></strong></div>
+        <div className="operation-title">OP–01 / PLATFORM TWO</div>
+        <div className={`channel ${beat.phase === "wiretap" ? "live" : ""}`}><i />{beat.phase === "wiretap" ? "LIVE CHANNEL" : "SECURE"}</div>
       </header>
 
       <section className="workspace">
         <nav className="phase-rail" aria-label="Operation phases">
           {phaseOrder.map((phase) => (
-            <button key={phase} className={phase === currentCue.phase ? "active" : ""} onClick={() => jumpToPhase(phase)}>
-              <span>{phaseLabel(phase).split(" / ")[0]}</span>
-              {phaseLabel(phase).split(" / ")[1]}
+            <button key={phase} className={phase === beat.phase ? "active" : ""} onClick={() => jumpToPhase(phase)}>
+              <span>{phaseLabel(phase).split(" / ")[0]}</span>{phaseLabel(phase).split(" / ")[1]}
             </button>
           ))}
         </nav>
@@ -315,78 +278,48 @@ export default function App() {
         <div className="stage-shell">
           <div className="stage" style={{ backgroundImage: `url(${manifest.scene.background})` }}>
             <div className="scanlines" />
+            <div className={`mode-tag ${isResponse ? "response" : ""}`}><i />{beatMode(beat)}</div>
             <img className="chair" src={manifest.scene.chair} alt="" />
-            {handlerVisible && (
-              <AnimatedSprite
-                animation={animation.startsWith("tutor") ? animation : "tutor_idle_blink"}
-                manifest={manifest}
-                className="handler-sprite"
-              />
-            )}
-            {contactVisible && (
-              <AnimatedSprite
-                animation={animation.startsWith("diana") ? animation : isWiretap ? "diana_idle_blink" : "diana_interested"}
-                manifest={manifest}
-                className={`contact-sprite ${isWiretap ? "wiretap-contact" : ""}`}
-              />
-            )}
+
+            {handlerVisible && <AnimatedSprite animation={beat.speaker === "handler" ? "tutor_explain" : "tutor_idle_blink"} manifest={manifest} className="handler-sprite" />}
+            {courierVisible && <AnimatedSprite animation={courierAnimation} manifest={manifest} className="courier-sprite" />}
+            {contactVisible && <AnimatedSprite animation={contactAnimation} manifest={manifest} className="contact-sprite" />}
+            {isResponse && <ResponseSignal beat={beat} active={playing} />}
+
+            {courierVisible && <div className="nameplate courier-name"><b>ALEX</b><span>COURIER</span></div>}
+            {contactVisible && <div className="nameplate contact-name"><b>DIANA</b><span>CONTACT</span></div>}
+
+            <EvidenceBoard evidence={beat.evidence} hidden={isResponse} />
+            {beat.phase === "wiretap" && <div className="wire-signal">{Array.from({ length: 43 }, (_, index) => <i key={index} style={{ "--bar": `${18 + (index * 41) % 76}%` } as CSSProperties} />)}</div>}
+
             <img className="table" src={manifest.scene.table} alt="" />
             <img className={`recorder ${playing ? "is-playing" : ""}`} src={playing ? manifest.scene.recorderPlaying : manifest.scene.recorderPaused} alt="" />
 
-            {!isDecision && (
-              <div className={`speech-card ${isWiretap ? "wiretap-card" : ""} kind-${currentCue.kind}`}>
-                <div className="speaker-label">
-                  <span>{currentCue.speaker === "handler" ? "SHELDON / HANDLER" : currentCue.speaker.toUpperCase()}</span>
-                  <b>{phaseLabel(currentCue.phase)}</b>
-                </div>
-                <p lang={currentCue.locale.slice(0, 2)}>{currentCue.text}</p>
-                {currentCue.translation && !isWiretap && <small>{currentCue.translation}</small>}
-                {currentCue.kind === "prompt" && playing && (
-                  <div className="response-window" style={responseStyle}><i /></div>
-                )}
-              </div>
-            )}
-
-            {isWiretap && (
-              <div className="signal-strip">
-                {Array.from({ length: 31 }, (_, index) => <i key={index} style={{ "--bar": `${20 + (index * 37) % 78}%` } as CSSProperties} />)}
-              </div>
-            )}
-
-            {isDecision && <DecisionPanel manifest={manifest} onSubmit={submitIntercept} />}
-
-            {currentCue.phase === "debrief" && interceptResult && (
-              <div className={`result-stamp ${resultCorrect ? "correct" : "wrong"}`}>
-                {resultCorrect ? "INTERCEPT SUCCESS" : "TEAM MISDIRECTED"}
-              </div>
-            )}
+            {beat.kind === "decision" && !dispatch && <DispatchPanel onSubmit={setDispatch} />}
+            {dispatch && <Outcome dispatch={dispatch} onReplay={() => jumpTo(liveStart, true)} onRetry={() => setDispatch(null)} />}
           </div>
 
           <div className="transport">
-            <button className="round" onClick={() => jumpTo(cueIndex - 1)} aria-label="Previous cue">‹</button>
-            <button className="play" onClick={() => setPlaying((value) => !value)}>{playing ? "PAUSE" : cueIndex === 0 ? "BEGIN OPERATION" : "CONTINUE"}</button>
-            <button className="round" onClick={() => jumpTo(cueIndex + 1)} aria-label="Next cue">›</button>
+            <button className="round" onClick={() => jumpTo(beatIndex - 1)} aria-label="Previous beat">‹</button>
+            <button className="play" onClick={() => setPlaying((value) => !value)}>{playing ? "PAUSE" : beatIndex === 0 ? "BEGIN OPERATION" : "CONTINUE"}</button>
+            <button className="round" onClick={() => jumpTo(beatIndex + 1)} aria-label="Next beat">›</button>
             <div className="timeline">
-              <button className="timeline-track" onClick={(event) => jumpTo(Math.round((event.nativeEvent.offsetX / event.currentTarget.clientWidth) * (lesson.length - 1)))} aria-label="Operation timeline">
-                <i style={{ width: `${progress * 100}%` }} />
-              </button>
-              <div><span>{formatTime(elapsed)} / {formatTime(plannedDurationSeconds)}</span><span>CUE {cueIndex + 1} / {lesson.length}</span></div>
+              <i><b style={{ width: `${progress * 100}%` }} /></i>
+              <span>BEAT {String(beatIndex + 1).padStart(2, "0")} / {lesson.length}</span>
             </div>
-            <label className="speed">PACE<select value={speed} onChange={(event) => setSpeed(Number(event.target.value))}><option value={1}>1×</option><option value={1.35}>1.35×</option><option value={1.75}>1.75×</option></select></label>
+            <label>PACE <select value={speed} onChange={(event) => setSpeed(Number(event.target.value))}><option value="1">1×</option><option value="1.2">1.2×</option><option value="1.4">1.4×</option></select></label>
           </div>
         </div>
 
         <aside className="intel-panel">
-          <p className="eyebrow">Mission memory</p>
-          <h2>Hold four facts.</h2>
-          <div className="fact-grid">
-            <div><span>01</span><strong>PLACE</strong><small>Where?</small></div>
-            <div><span>02</span><strong>TIME</strong><small>Correction?</small></div>
-            <div><span>03</span><strong>PLATFORM</strong><small>Which one?</small></div>
-            <div><span>04</span><strong>COURIER</strong><small>Who?</small></div>
-          </div>
-          <div className="protocol"><span>TRAINING PROTOCOL</span><p>Listen. Retrieve aloud. Hear the model. Recur in a new context. Then act without English.</p></div>
-          <div className="tts-note">LOCAL VOICE<br /><span>Browser TTS is a timing stand-in. French requires native review.</span></div>
+          <p>RETRIEVAL CHAIN</p>
+          <h2>One line. Three jobs.</h2>
+          <ol>
+            <li className={["acquisition", "briefing"].includes(beat.phase) ? "active" : ""}><span>01</span><div><b>BUILD</b><small>Meaning is anchored to the changing clock.</small></div></li>
+            <li className={["retrieval", "rehearsal"].includes(beat.phase) ? "active" : ""}><span>02</span><div><b>PRODUCE</b><small>You take the missing character's turn.</small></div></li>
+            <li className={["wiretap", "decision"].includes(beat.phase) ? "active" : ""}><span>03</span><div><b>ACT</b><small>The same line changes the field plan.</small></div></li>
+          </ol>
+          <div className="rule"><i />NO TRANSCRIPT<br /><i />NO TRANSLATION CHOICES<br /><i />DISTINCT SPEAKERS</div>
         </aside>
       </section>
     </main>

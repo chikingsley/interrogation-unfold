@@ -1,0 +1,341 @@
+{
+  "beats": [
+    {
+      "id": "briefing-file",
+      "phase": "briefing",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "file-eight",
+      "audioId": "handler-file",
+      "script": "The source file says eight o'clock. The call decides whether the team moves. You will take the contact's side of the exchange.",
+      "postMs": 700
+    },
+    {
+      "id": "cold-courier",
+      "phase": "briefing",
+      "kind": "audio",
+      "speaker": "courier",
+      "shot": "courier",
+      "evidence": "file-eight",
+      "audioId": "courier-eight",
+      "script": "À huit heures ?",
+      "postMs": 450
+    },
+    {
+      "id": "cold-contact",
+      "phase": "briefing",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "correction",
+      "audioId": "contact-correction",
+      "script": "Non. Pas à huit heures. À neuf heures.",
+      "postMs": 900
+    },
+    {
+      "id": "anchor-correction",
+      "phase": "acquisition",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "correction",
+      "audioId": "handler-anchor",
+      "script": "The first time is wrong. The second time is right. Listen to her correction once more.",
+      "postMs": 500
+    },
+    {
+      "id": "model-correction",
+      "phase": "acquisition",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "correction",
+      "audioId": "contact-correction",
+      "script": "Non. Pas à huit heures. À neuf heures.",
+      "postMs": 900
+    },
+    {
+      "id": "prompt-reject",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "file-eight",
+      "audioId": "handler-reject",
+      "script": "Tell him no. Not at eight o'clock.",
+      "postMs": 250
+    },
+    {
+      "id": "response-reject",
+      "phase": "retrieval",
+      "kind": "response",
+      "speaker": "player",
+      "shot": "player-contact",
+      "evidence": "file-eight",
+      "responseMs": 4600
+    },
+    {
+      "id": "model-reject",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "file-eight",
+      "audioId": "contact-reject",
+      "script": "Non. Pas à huit heures.",
+      "postMs": 850
+    },
+    {
+      "id": "prompt-nine",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "correction",
+      "audioId": "handler-nine",
+      "script": "Now give him the correct time. At nine o'clock.",
+      "postMs": 250
+    },
+    {
+      "id": "response-nine",
+      "phase": "retrieval",
+      "kind": "response",
+      "speaker": "player",
+      "shot": "player-contact",
+      "evidence": "correction",
+      "responseMs": 4000
+    },
+    {
+      "id": "model-nine",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "correction",
+      "audioId": "contact-nine",
+      "script": "À neuf heures.",
+      "postMs": 900
+    },
+    {
+      "id": "exchange-courier",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "courier",
+      "shot": "courier",
+      "evidence": "file-eight",
+      "audioId": "courier-eight",
+      "script": "À huit heures ?",
+      "postMs": 250
+    },
+    {
+      "id": "response-full",
+      "phase": "retrieval",
+      "kind": "response",
+      "speaker": "player",
+      "shot": "player-contact",
+      "evidence": "correction",
+      "responseMs": 5600
+    },
+    {
+      "id": "model-full",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "correction",
+      "audioId": "contact-correction",
+      "script": "Non. Pas à huit heures. À neuf heures.",
+      "postMs": 1100
+    },
+    {
+      "id": "interleave-platform",
+      "phase": "acquisition",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "platform",
+      "audioId": "handler-platform",
+      "script": "One more detail. The handoff moves to platform two. Listen.",
+      "postMs": 350
+    },
+    {
+      "id": "model-platform",
+      "phase": "acquisition",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "platform",
+      "audioId": "contact-platform",
+      "script": "Le quai numéro deux.",
+      "postMs": 700
+    },
+    {
+      "id": "prompt-platform",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "platform",
+      "audioId": "handler-platform-prompt",
+      "script": "Say platform two.",
+      "postMs": 250
+    },
+    {
+      "id": "response-platform",
+      "phase": "retrieval",
+      "kind": "response",
+      "speaker": "player",
+      "shot": "player-contact",
+      "evidence": "platform",
+      "responseMs": 4200
+    },
+    {
+      "id": "model-platform-retrieved",
+      "phase": "retrieval",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "platform",
+      "audioId": "contact-platform",
+      "script": "Le quai numéro deux.",
+      "postMs": 1000
+    },
+    {
+      "id": "rehearsal-setup",
+      "phase": "rehearsal",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "file-eight",
+      "audioId": "handler-rehearsal",
+      "script": "Now take her place. Complete both of her lines before she returns to model them.",
+      "postMs": 500
+    },
+    {
+      "id": "rehearsal-time-question",
+      "phase": "rehearsal",
+      "kind": "audio",
+      "speaker": "courier",
+      "shot": "courier",
+      "evidence": "file-eight",
+      "audioId": "courier-eight",
+      "script": "À huit heures ?",
+      "postMs": 200
+    },
+    {
+      "id": "rehearsal-time-response",
+      "phase": "rehearsal",
+      "kind": "response",
+      "speaker": "player",
+      "shot": "player-contact",
+      "evidence": "correction",
+      "responseMs": 5200
+    },
+    {
+      "id": "rehearsal-time-model",
+      "phase": "rehearsal",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "correction",
+      "audioId": "contact-correction",
+      "script": "Non. Pas à huit heures. À neuf heures.",
+      "postMs": 750
+    },
+    {
+      "id": "rehearsal-platform-question",
+      "phase": "rehearsal",
+      "kind": "audio",
+      "speaker": "courier",
+      "shot": "courier",
+      "evidence": "platform",
+      "audioId": "courier-platform",
+      "script": "Quel quai ?",
+      "postMs": 200
+    },
+    {
+      "id": "rehearsal-platform-response",
+      "phase": "rehearsal",
+      "kind": "response",
+      "speaker": "player",
+      "shot": "player-contact",
+      "evidence": "platform",
+      "responseMs": 4200
+    },
+    {
+      "id": "rehearsal-platform-model",
+      "phase": "rehearsal",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "contact",
+      "evidence": "platform",
+      "audioId": "contact-platform",
+      "script": "Le quai numéro deux.",
+      "postMs": 1100
+    },
+    {
+      "id": "live-setup",
+      "phase": "wiretap",
+      "kind": "audio",
+      "speaker": "handler",
+      "shot": "handler",
+      "evidence": "live",
+      "audioId": "handler-live",
+      "script": "Live channel. Do not answer. Listen, then update the team's clock and platform.",
+      "postMs": 1000
+    },
+    {
+      "id": "live-time-question",
+      "phase": "wiretap",
+      "kind": "audio",
+      "speaker": "courier",
+      "shot": "two-shot",
+      "evidence": "live",
+      "audioId": "courier-live-time",
+      "script": "Le rendez-vous est à huit heures ?",
+      "postMs": 500
+    },
+    {
+      "id": "live-time-correction",
+      "phase": "wiretap",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "two-shot",
+      "evidence": "live",
+      "audioId": "contact-correction",
+      "script": "Non. Pas à huit heures. À neuf heures.",
+      "postMs": 700
+    },
+    {
+      "id": "live-platform-question",
+      "phase": "wiretap",
+      "kind": "audio",
+      "speaker": "courier",
+      "shot": "two-shot",
+      "evidence": "live",
+      "audioId": "courier-platform",
+      "script": "Quel quai ?",
+      "postMs": 450
+    },
+    {
+      "id": "live-platform-answer",
+      "phase": "wiretap",
+      "kind": "audio",
+      "speaker": "contact",
+      "shot": "two-shot",
+      "evidence": "live",
+      "audioId": "contact-platform",
+      "script": "Le quai numéro deux.",
+      "postMs": 1100
+    },
+    {
+      "id": "field-decision",
+      "phase": "decision",
+      "kind": "decision",
+      "speaker": "system",
+      "shot": "evidence",
+      "evidence": "decision"
+    }
+  ]
+}

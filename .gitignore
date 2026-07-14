@@ -20,6 +20,7 @@ dist/
 .tsbuildinfo/
 .vite-cache/
 prototypes/*/public/private-assets/
+prototypes/*/public/private-audio/
 
 # macOS
 .DS_Store

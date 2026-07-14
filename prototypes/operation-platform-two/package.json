@@ -8,7 +8,7 @@
     "dev": "vite --configLoader native",
     "build": "tsc -b && vite build --configLoader native",
     "lint": "oxlint",
-    "validate:lesson": "node src/validate-lesson.ts",
+    "validate:lesson": "bun src/validate-lesson.ts",
     "preview": "vite preview --configLoader native"
   },
   "dependencies": {

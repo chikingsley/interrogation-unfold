@@ -38,6 +38,9 @@ ANIMATIONS = (
     AnimationSelection("diana", "diana_interested"),
     AnimationSelection("diana", "diana_idle_scared"),
     AnimationSelection("diana", "diana_smile"),
+    AnimationSelection("alex", "alex_idle"),
+    AnimationSelection("alex", "alex_headshake"),
+    AnimationSelection("alex", "alex_smile"),
 )
 
 SCENE_ASSETS = {
